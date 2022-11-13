@@ -6,19 +6,26 @@
 #include <string> //getline() 사용
 #include <conio.h> //_getch() 함수는 사용자가 입력한 키에 대한 값을 아스키코드로 반환
 #include "time.h"
-
-
 #define SPACE 32
 using namespace std;
 
 class ToDo {
 public:
-	bool b ; //완료 여부 - 기본값 0
+	bool b; //완료 여부 - 기본값 0
 	int level = 0; //우선순위
 	string work; //문자열 받기
 };
 
 ToDo Note;
+
+void inputlist(){
+	string in_line;
+	ifstream in("1.txt"); // work라는 메모장 출력
+	while (getline(in, in_line)) {
+		cout << in_line << endl;
+	}
+	in.close();
+}
 
 void gotoxy(int x, int y) {
 	COORD pos;
@@ -368,7 +375,7 @@ void listadd() {
 		break;
 	}
 
-}		
+}
 /*일정 삭제*/
 void listdelete() {
 
@@ -564,7 +571,7 @@ void listdelete() {
 void calendar() {
 	system("cls");
 	system("mode con cols=150 lines=50");
-	char a=NULL;
+	char a = NULL;
 	cout << endl << endl;
 	cout << setw(78) << "11월" << endl << endl << endl;
 
@@ -851,11 +858,14 @@ void Progress() {
 	//-----------------------------------------------------------
 }
 /*일정 완료*/
-void ScheduleComplete(int i) {
+void ScheduleComplete() {
 	ToDo sch;
+	int i;
+	cout << "완료하실 일정 번호를 입력해주세요.>>";
+	cin >> i;
 	i = --i;
 	inF(&sch, i);
-	
+
 	if (sch.b == 204) {
 		cout << "일정이 없습니다." << endl;
 	}
@@ -905,7 +915,6 @@ void mainmemu() { // 메인화면 출력
 /*서브 화면*/
 void submemu() {
 	system("cls");
-	/* 서브 메뉴 날짜*/
 	system("mode con: cols=100 lines=70");
 	time_t timer = time(NULL);
 	struct tm* t = localtime(&timer);
@@ -925,6 +934,7 @@ void submemu() {
 	for (int i = 0; i < 10; i++) {
 		cout << "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■" << endl;
 		cout << setw(8) << "■" << endl;
+		inputlist();
 		cout << setw(8) << "■" << endl;
 		cout << setw(8) << "■" << endl;
 	}
@@ -932,18 +942,36 @@ void submemu() {
 
 
 	/*메뉴얼 명령어*/
-	cout << "\n\n\n\n\n\n\n\n\n\t\t\t\t\t" << "메뉴얼 명령어 : 메뉴얼";
-
+	cout << "\n\n\n\n\n\n\n\n\n\t\t\t\t\t" << "메뉴얼 명령어 : C";
+	cout << "명령어 >>" << endl;
 }
 /*화면 전환*/
+
+int submove();
+
 void move() {
-	char a; //달력이동 변수
+	char a; //화면이동 변수
 	mainmemu();
 	a = _getch(); // = system("pause"); 키 입력 받으면 이동
 	switch (a) {
-	case 'D': submemu(); break;
+	case 'D': do { submove(); } while (submove() != 0); break;
 	case 'M': calendar(); break;
 	}
+}
+
+int submove() {
+		char C = NULL; //화면이동 변수
+		submemu();
+		C = _getch();
+		if (C == 'M') return 0;
+		switch (C) {
+		case 'A': listadd(); break;
+		case 'F': ScheduleComplete(); break;
+		case 'D': listdelete(); break;
+		case 'C': Manual(); break;
+		case 'E': exit(0); break;
+		default: cout << "잘못된 명령어 입니다. 다시 입력해주세요"; break;
+		}
 }
 
 int main() {
