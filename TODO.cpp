@@ -7,6 +7,12 @@
 #include <conio.h> //_getch() 함수는 사용자가 입력한 키에 대한 값을 아스키코드로 반환
 #include "time.h"
 #define SPACE 32
+#define D 68
+#define d 100
+#define M 77
+#define m 109
+//#define C 67
+//#define c 99
 using namespace std;
 
 class ToDo {
@@ -17,15 +23,6 @@ public:
 };
 
 ToDo Note;
-
-void inputlist(){
-	string in_line;
-	ifstream in("1.txt"); // work라는 메모장 출력
-	while (getline(in, in_line)) {
-		cout << in_line << endl;
-	}
-	in.close();
-}
 
 void gotoxy(int x, int y) {
 	COORD pos;
@@ -375,7 +372,8 @@ void listadd() {
 		break;
 	}
 
-}
+}/*일정 추가*/
+
 /*일정 삭제*/
 void listdelete() {
 
@@ -567,6 +565,7 @@ void listdelete() {
 	txt9.close();
 	txt10.close();
 }
+
 /*캘린더 UI*/
 void calendar() {
 	system("cls");
@@ -604,14 +603,15 @@ void calendar() {
 	cout << endl;
 
 	cout << "\t\t\t\t\t\t\t" << "메인화면으로 돌아가려면 아무 키를 누르세요." << endl << endl;
-	cin >> a;
+	a = _getch();
 }
+
 /*메뉴얼 UI*/
 void Manual() {
 	system("cls");
 	system(" mode con lines=70 cols=100");
 	//cout << "□■■■□■■■■■□□■■■■■□□■■■■■○○■■■■■□□■■■■■□□■■■■■□■■■□" << endl;
-
+	int NUM2 = 0;
 	for (int i = 0; i < 88; i += 2)
 	{
 		gotoxy(6 + i, 1);
@@ -659,8 +659,9 @@ void Manual() {
 	cout << "세부메뉴 / 달력 / 메인메뉴로 돌아가는 명령어";
 
 	gotoxy(0, 64);
-	cout << "ㅇㄹ";
+	cin >> NUM2;
 }
+
 /*일정 값 가져오기*/
 void inF(ToDo* a, int i) {
 	switch (i + 1) {
@@ -669,6 +670,7 @@ void inF(ToDo* a, int i) {
 		fin.open("1.txt");
 		fin >> a->b >> a->level;
 		getline(fin, a->work);
+		fin.close();
 		break;
 	}
 	case 2: {
@@ -676,6 +678,7 @@ void inF(ToDo* a, int i) {
 		fin.open("2.txt");
 		fin >> a->b >> a->level;
 		getline(fin, a->work);
+		fin.close();
 		break;
 	}
 	case 3: {
@@ -683,6 +686,7 @@ void inF(ToDo* a, int i) {
 		fin.open("3.txt");
 		fin >> a->b >> a->level;
 		getline(fin, a->work);
+		fin.close();
 		break;
 	}
 	case 4: {
@@ -697,6 +701,7 @@ void inF(ToDo* a, int i) {
 		fin.open("5.txt");
 		fin >> a->b >> a->level;
 		getline(fin, a->work);
+		fin.close();
 		break;
 	}
 	case 6: {
@@ -704,6 +709,7 @@ void inF(ToDo* a, int i) {
 		fin.open("6.txt");
 		fin >> a->b >> a->level;
 		getline(fin, a->work);
+		fin.close();
 		break;
 	}
 	case 7: {
@@ -711,6 +717,7 @@ void inF(ToDo* a, int i) {
 		fin.open("7.txt");
 		fin >> a->b >> a->level;
 		getline(fin, a->work);
+		fin.close();
 		break;
 	}
 	case 8: {
@@ -718,6 +725,7 @@ void inF(ToDo* a, int i) {
 		fin.open("8.txt");
 		fin >> a->b >> a->level;
 		getline(fin, a->work);
+		fin.close();
 		break;
 	}
 	case 9: {
@@ -725,6 +733,7 @@ void inF(ToDo* a, int i) {
 		fin.open("9.txt");
 		fin >> a->b >> a->level;
 		getline(fin, a->work);
+		fin.close();
 		break;
 	}
 	case 10: {
@@ -732,6 +741,7 @@ void inF(ToDo* a, int i) {
 		fin.open("10.txt");
 		fin >> a->b >> a->level;
 		getline(fin, a->work);
+		fin.close();	
 		break;
 	}
 	default: {
@@ -739,6 +749,7 @@ void inF(ToDo* a, int i) {
 	}
 	}
 }
+
 /*일정 값 내보내기*/
 void outF(ToDo a, int i) {
 	switch (i + 1) {
@@ -816,6 +827,7 @@ void outF(ToDo a, int i) {
 		break;
 	}
 }
+
 /*진척도*/
 void Progress() {
 	ToDo sch[10];
@@ -857,6 +869,7 @@ void Progress() {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
 	//-----------------------------------------------------------
 }
+
 /*일정 완료*/
 void ScheduleComplete() {
 	ToDo sch;
@@ -875,9 +888,19 @@ void ScheduleComplete() {
 		outF(sch, i);
 	}
 }
+
+void inputlist() {
+	ToDo abc;
+	ToDo a[10];
+	for (int i = 0; i < 10; i++) {
+		inF(&abc, i);
+		a[i].work = abc.work;
+	}
+}
+
 /*메인 화면*/
 void mainmemu() { // 메인화면 출력
-	system("cls");//화면 클리어 
+	system("cls");//화면 클리어 
 	system("mode con cols=100 lines=70"); //콘솔 100*70
 
 	gotoxy(0, 5);
@@ -900,22 +923,41 @@ void mainmemu() { // 메인화면 출력
 	cout << "                         ■■■■■■■ ■■■   ■■■■■       ■■■           " << endl << endl;
 	cout << "                                        목표를 달성해봐요!                         " << endl;
 
-	gotoxy(41, 35); cout << "■          ■";
-	gotoxy(41, 36); cout << "■■      ■■";
-	gotoxy(41, 37); cout << "■  ■  ■  ■";
-	gotoxy(41, 38); cout << "■    ■    ■";
-	gotoxy(41, 39); cout << "■          ■";
-	gotoxy(41, 40); cout << "■          ■(Space)";
+	gotoxy(35, 36); cout << "■■■";
+	gotoxy(35, 37); cout << "■    ■";
+	gotoxy(35, 38); cout << "■    ■";
+	gotoxy(35, 39); cout << "■    ■";
+	gotoxy(35, 40); cout << "■■■  (일정)";
+
+	gotoxy(50, 36); cout << "  ■■■";
+	gotoxy(50, 37); cout << "■      ";
+	gotoxy(50, 38); cout << "■      ";
+	gotoxy(50, 39); cout << "■        ";
+	gotoxy(50, 40); cout << "  ■■■ (달력)";
 
 
 	gotoxy(0, 65);
 	cout << "명령어>>";
 
 }
+
 /*서브 화면*/
 void submemu() {
-	system("cls");
+	system("cls");	
 	system("mode con: cols=100 lines=70");
+	ToDo a[10];
+	string num3[10];
+	int num4[10];
+	for (int i = 0; i < 10; i++) {
+		int num5=0;
+		inF(&a[num5], num5);
+
+		if (a[num5].b != 204) {
+			num3[num5] = a[num5].work;
+			num4[num5] = a[num5].level;
+		}
+		num5++;
+	}	
 	time_t timer = time(NULL);
 	struct tm* t = localtime(&timer);
 	struct tm {
@@ -933,10 +975,12 @@ void submemu() {
 	/*리스트*/
 	for (int i = 0; i < 10; i++) {
 		cout << "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■" << endl;
-		cout << setw(8) << "■" << endl;
-		inputlist();
-		cout << setw(8) << "■" << endl;
-		cout << setw(8) << "■" << endl;
+		cout << setw(6) << "■" << endl;
+		if((num4[i]!=204) && (num3[i]!=""))
+			cout << " "<< num4[i] << setw(4) << "■" << num3[i] << endl;
+		else
+			cout << setw(6) << "■" << endl;
+		cout << setw(6) << "■" << endl;
 	}
 	cout << "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■" << endl;
 
@@ -945,35 +989,48 @@ void submemu() {
 	cout << "\n\n\n\n\n\n\n\n\n\t\t\t\t\t" << "메뉴얼 명령어 : C";
 	cout << "명령어 >>" << endl;
 }
-/*화면 전환*/
 
+/*화면 전환 */
 int submove();
 
+/*화면 전환2*/
 void move() {
-	char a; //화면이동 변수
+	int num1 = 0; //화면이동 변수
 	mainmemu();
-	a = _getch(); // = system("pause"); 키 입력 받으면 이동
-	switch (a) {
-	case 'D': do { submove(); } while (submove() != 0); break;
-	case 'M': calendar(); break;
+	num1 = _getch(); // = system("pause"); 키 입력 받으면 이동
+	switch (num1) {
+	case 67: calendar(); break;		// 명령어 C 아스키 코드
+	case 68: do { submove(); } while (submove() != 0); break;		// 명령어 D 아스키 코드
+	case 99: calendar(); break;		// 명령어 c 아스키 코드
+	case 100: do { submove(); } while (submove() != 0); break;		// 명령어 d 아스키 코드
 	}
 }
 
+/*화면 전환*/
 int submove() {
-		char C = NULL; //화면이동 변수
+		int num2 = NULL; //화면이동 변수
 		submemu();
-		C = _getch();
-		if (C == 'M') return 0;
-		switch (C) {
-		case 'A': listadd(); break;
-		case 'F': ScheduleComplete(); break;
-		case 'D': listdelete(); break;
-		case 'C': Manual(); break;
-		case 'E': exit(0); break;
+		num2 = _getch();	//화면이동 입력
+		if (num2 ==  77 || num2 == 109) return 0;		// 메인메뉴로 이동
+		switch (num2) {
+		case 65: listadd(); break;		// 명령어 A 아스키 코드
+		case 70: ScheduleComplete(); break;		// 명령어 F 아스키 코드
+		case 68: listdelete(); break;		// 명령어 D 아스키 코드
+		case 67: Manual(); break;		// 명령어 M 아스키 코드
+		case 69: exit(0); break;		// 명령어 E 아스키 코드
+		case 97: listadd(); break;		// 명령어 a 아스키 코드
+		case 102: ScheduleComplete(); break;		// 명령어 f 아스키 코드
+		case 100: listdelete(); break;		// 명령어 d 아스키 코드
+		case 99: Manual(); break;		// 명령어 m 아스키 코드
+		case 101: exit(0); break;		// 명령어 e 아스키 코드
 		default: cout << "잘못된 명령어 입니다. 다시 입력해주세요"; break;
 		}
 }
 
+
+
+
+/*메인 함수*/
 int main() {
 	system("title 일일 목록");
 	while (true)
