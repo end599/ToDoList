@@ -886,18 +886,6 @@ void submemu() {
 	system("cls");
 	system("mode con: cols=100 lines=70");
 	ToDo a[10];
-	string num3[10];
-	int num4[10];
-	for (int i = 0; i < 10; i++) {
-		int num5 = 0;
-		inF(&a[num5], num5);
-
-		if (a[num5].b != 204) {
-			num3[num5] = a[num5].work;
-			num4[num5] = a[num5].level;
-		}
-		num5++;
-	}
 	time_t timer = time(NULL);
 	struct tm* t = localtime(&timer);
 	struct tm {
@@ -905,8 +893,12 @@ void submemu() {
 		int tm_mon;
 		int tm_year;
 	};
-	cout << "\t\t\t\t\t" << to_string(t->tm_year - 100) << "." << to_string(t->tm_mon + 1) << "." << to_string(t->tm_mday) << "  오늘 할 일!" << endl;
 
+	for (int i = 0; i < 10; i++) {
+		inF(&a[i], i);
+	}
+
+	cout << "\t\t\t\t\t" << to_string(t->tm_year - 100) << "." << to_string(t->tm_mon + 1) << "." << to_string(t->tm_mday) << "  오늘 할 일!" << endl;
 
 	/*성취도*/
 	Progress();
@@ -916,8 +908,21 @@ void submemu() {
 	for (int i = 0; i < 10; i++) {
 		cout << "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■" << endl;
 		cout << setw(6) << "■" << endl;
-		if ((num4[i] != 204) && (num3[i] != ""))
-			cout << " " << num4[i] << setw(4) << "■" << num3[i] << endl;
+		if (a[i].b != 204) {
+			if (a[i].b == true) {
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 2);
+				cout << " " << a[i].level << setw(4);
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+				cout << "■" ;
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 2);
+				cout << a[i].work << endl;
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+			}
+			else if (a[i].b == false) {
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+				cout << " " << a[i].level << setw(4) << "■" << a[i].work << endl;
+			}
+		}
 		else
 			cout << setw(6) << "■" << endl;
 		cout << setw(6) << "■" << endl;
