@@ -23,6 +23,7 @@ public:
 };
 
 ToDo Note;
+void outF(ToDo, int);	//일정 추가에서 사용하기위해서 선언해줌
 
 void gotoxy(int x, int y) {
 	COORD pos;
@@ -44,329 +45,258 @@ void listadd() {
 			cout << " 이미 내용 입력되어 있습니다. 새로운 내용을 입력하고 싶으면 스페이스바를 눌러주세요. 아니라면 스페이스바를 제외한 키를 눌러주세요." << endl;
 			int a = _getch();
 			if (a == 32) {
-				ofstream t("1.txt");   //파일 쓰기 준비 and "1.txt"없으면 생성, 있으면 열기
-				if (t.is_open()) {      //파일이 열려 있으면~
-					cout << "내용을 입력해 주세요 : ";
-					cin.clear();           //getline 버퍼 초기화(전체 버퍼 초기화)
-					getline(cin, Note.work);   // 공백 포함 문자열 쓰기
-				}
-				Note.b = 0;
-				t << Note.b << " " << Note.level << " " << Note.work; //해당 파일에 b level work 순서대로 입력
-				t.close();   //파일 닫기
-				t1.close();   //파일 닫기
-				break;
-			}
-		}
-		else {
-			ofstream t("1.txt");   //파일 쓰기 준비 and "1.txt"없으면 생성, 있으면 열기
-			if (t.is_open()) {      //파일이 열려 있으면~
 				cout << "내용을 입력해 주세요 : ";
 				cin.clear();           //getline 버퍼 초기화(전체 버퍼 초기화)
 				getline(cin, Note.work);   // 공백 포함 문자열 쓰기
+				Note.b = 0;
+				outF(Note, 0);
+				t1.close();
+				break;
 			}
-			Note.b = 0;
-			t << Note.b << " " << Note.level << " " << Note.work; //해당 파일에 b level work 순서대로 입력
-			t1.close();   //파일 닫기
-			t.close();   //파일 닫기
 		}
-		break;
+		else {
+			cout << "내용을 입력해 주세요 : ";
+			cin.clear();           //getline 버퍼 초기화(전체 버퍼 초기화)
+			getline(cin, Note.work);   // 공백 포함 문자열 쓰기
+			Note.b = 0;
+			outF(Note, 0);
+			t1.close();	//파일 닫기
+			break;
+		}
 	}
 	case 2: {
 		ifstream t1("2.txt");
-		t1.seekg(0, ios::end);
-		if (t1.tellg() > 4) {
+		t1.seekg(0, ios::end); // beg = 시작점, cur = 중간 지점, end =끝지점
+		if (t1.tellg() > 4) { // tellg() 파일 크기
 			cout << " 이미 내용 입력되어 있습니다. 새로운 내용을 입력하고 싶으면 스페이스바를 눌러주세요. 아니라면 스페이스바를 제외한 키를 눌러주세요." << endl;
 			int a = _getch();
 			if (a == 32) {
-				ofstream t("2.txt");
-				if (t.is_open()) {
-					cout << "내용을 입력해 주세요 : ";
-					cin.clear();
-					getline(cin, Note.work);
-				}
+				cout << "내용을 입력해 주세요 : ";
+				cin.clear();           //getline 버퍼 초기화(전체 버퍼 초기화)
+				getline(cin, Note.work);   // 공백 포함 문자열 쓰기
 				Note.b = 0;
-				t << Note.b << " " << Note.level << " " << Note.work;
-				t.close();
+				outF(Note, 1);
 				t1.close();
 				break;
 			}
 		}
 		else {
-			ofstream t("1.txt");
-			if (t.is_open()) {
-				cout << "내용을 입력해 주세요 : ";
-				cin.clear();
-				getline(cin, Note.work);
-			}
-			t << Note.b << " " << Note.level << " " << Note.work;
-			t.close();
-			t1.close();
+			cout << "내용을 입력해 주세요 : ";
+			cin.clear();           //getline 버퍼 초기화(전체 버퍼 초기화)
+			getline(cin, Note.work);   // 공백 포함 문자열 쓰기
+			Note.b = 0;
+			outF(Note, 1);
+			t1.close();		//파일 닫기
+			break;
 		}
-		break;
 	}
 	case 3: {
 		ifstream t1("3.txt");
-		t1.seekg(0, ios::end);
-		if (t1.tellg() > 4) {
+		t1.seekg(0, ios::end); // beg = 시작점, cur = 중간 지점, end =끝지점
+		if (t1.tellg() > 4) { // tellg() 파일 크기
 			cout << " 이미 내용 입력되어 있습니다. 새로운 내용을 입력하고 싶으면 스페이스바를 눌러주세요. 아니라면 스페이스바를 제외한 키를 눌러주세요." << endl;
 			int a = _getch();
 			if (a == 32) {
-				ofstream t("3.txt");
-				if (t.is_open()) {
-					cout << "내용을 입력해 주세요 : ";
-					cin.clear();
-					getline(cin, Note.work);
-				}
+				cout << "내용을 입력해 주세요 : ";
+				cin.clear();           //getline 버퍼 초기화(전체 버퍼 초기화)
+				getline(cin, Note.work);   // 공백 포함 문자열 쓰기
 				Note.b = 0;
-				t << Note.b << " " << Note.level << " " << Note.work;
-				t.close();
+				outF(Note, 2);
 				t1.close();
 				break;
 			}
 		}
 		else {
-			ofstream t("3.txt");
-			if (t.is_open()) {
-				cout << "내용을 입력해 주세요 : ";
-				cin.clear();
-				getline(cin, Note.work);
-			}
-			t << Note.b << " " << Note.level << " " << Note.work;
-			t.close();
-			t1.close();
+			cout << "내용을 입력해 주세요 : ";
+			cin.clear();           //getline 버퍼 초기화(전체 버퍼 초기화)
+			getline(cin, Note.work);   // 공백 포함 문자열 쓰기
+			Note.b = 0;
+			outF(Note, 2);
+			t1.close();		//파일 닫기
+			break;
 		}
-		break;
 	}
 	case 4: {
 		ifstream t1("4.txt");
-		t1.seekg(0, ios::end);
-		if (t1.tellg() > 4) {
+		t1.seekg(0, ios::end); // beg = 시작점, cur = 중간 지점, end =끝지점
+		if (t1.tellg() > 4) { // tellg() 파일 크기
 			cout << " 이미 내용 입력되어 있습니다. 새로운 내용을 입력하고 싶으면 스페이스바를 눌러주세요. 아니라면 스페이스바를 제외한 키를 눌러주세요." << endl;
 			int a = _getch();
 			if (a == 32) {
-				ofstream t("4.txt");
-				if (t.is_open()) {
-					cout << "내용을 입력해 주세요 : ";
-					cin.clear();
-					getline(cin, Note.work);
-				}
+				cout << "내용을 입력해 주세요 : ";
+				cin.clear();           //getline 버퍼 초기화(전체 버퍼 초기화)
+				getline(cin, Note.work);   // 공백 포함 문자열 쓰기
 				Note.b = 0;
-				t << Note.b << " " << Note.level << " " << Note.work;
-				t.close();
+				outF(Note, 3);
 				t1.close();
 				break;
 			}
 		}
 		else {
-			ofstream t("4.txt");
-			if (t.is_open()) {
-				cout << "내용을 입력해 주세요 : ";
-				cin.clear();
-				getline(cin, Note.work);
-			}
-			t << Note.b << " " << Note.level << " " << Note.work;
-			t.close();
-			t1.close();
+			cout << "내용을 입력해 주세요 : ";
+			cin.clear();           //getline 버퍼 초기화(전체 버퍼 초기화)
+			getline(cin, Note.work);   // 공백 포함 문자열 쓰기
+			Note.b = 0;
+			outF(Note, 3);
+			t1.close();		//파일 닫기
+			break;
 		}
-		break;
 	}
 	case 5: {
 		ifstream t1("5.txt");
-		t1.seekg(0, ios::end);
-		if (t1.tellg() > 4) {
+		t1.seekg(0, ios::end); // beg = 시작점, cur = 중간 지점, end =끝지점
+		if (t1.tellg() > 4) { // tellg() 파일 크기
 			cout << " 이미 내용 입력되어 있습니다. 새로운 내용을 입력하고 싶으면 스페이스바를 눌러주세요. 아니라면 스페이스바를 제외한 키를 눌러주세요." << endl;
 			int a = _getch();
 			if (a == 32) {
-				ofstream t("5.txt");
-				if (t.is_open()) {
-					cout << "내용을 입력해 주세요 : ";
-					cin.clear();
-					getline(cin, Note.work);
-				}
+				cout << "내용을 입력해 주세요 : ";
+				cin.clear();           //getline 버퍼 초기화(전체 버퍼 초기화)
+				getline(cin, Note.work);   // 공백 포함 문자열 쓰기
 				Note.b = 0;
-				t << Note.b << " " << Note.level << " " << Note.work;
-				t.close();
+				outF(Note, 4);
 				t1.close();
 				break;
 			}
 		}
 		else {
-			ofstream t("5.txt");
-			if (t.is_open()) {
-				cout << "내용을 입력해 주세요 : ";
-				cin.clear();
-				getline(cin, Note.work);
-			}
-			t << Note.b << " " << Note.level << " " << Note.work;
-			t.close();
-			t1.close();
+			cout << "내용을 입력해 주세요 : ";
+			cin.clear();           //getline 버퍼 초기화(전체 버퍼 초기화)
+			getline(cin, Note.work);   // 공백 포함 문자열 쓰기
+			Note.b = 0;
+			outF(Note, 4);
+			t1.close();		//파일 닫기
+			break;
 		}
-		break;
 	}
 	case 6: {
 		ifstream t1("6.txt");
-		t1.seekg(0, ios::end);
-		if (t1.tellg() > 4) {
+		t1.seekg(0, ios::end); // beg = 시작점, cur = 중간 지점, end =끝지점
+		if (t1.tellg() > 4) { // tellg() 파일 크기
 			cout << " 이미 내용 입력되어 있습니다. 새로운 내용을 입력하고 싶으면 스페이스바를 눌러주세요. 아니라면 스페이스바를 제외한 키를 눌러주세요." << endl;
 			int a = _getch();
 			if (a == 32) {
-				ofstream t("6.txt");
-				if (t.is_open()) {
-					cout << "내용을 입력해 주세요 : ";
-					cin.clear();
-					getline(cin, Note.work);
-				}
+				cout << "내용을 입력해 주세요 : ";
+				cin.clear();           //getline 버퍼 초기화(전체 버퍼 초기화)
+				getline(cin, Note.work);   // 공백 포함 문자열 쓰기
 				Note.b = 0;
-				t << Note.b << " " << Note.level << " " << Note.work;
-				t.close();
+				outF(Note, 5);
 				t1.close();
 				break;
 			}
 		}
 		else {
-			ofstream t("6.txt");
-			if (t.is_open()) {
-				cout << "내용을 입력해 주세요 : ";
-				cin.clear();
-				getline(cin, Note.work);
-			}
-			t << Note.b << " " << Note.level << " " << Note.work;
-			t.close();
-			t1.close();
+			cout << "내용을 입력해 주세요 : ";
+			cin.clear();           //getline 버퍼 초기화(전체 버퍼 초기화)
+			getline(cin, Note.work);   // 공백 포함 문자열 쓰기
+			Note.b = 0;
+			outF(Note, 5);
+			t1.close();		//파일 닫기
+			break;
 		}
-		break;
 	}
 	case 7: {
 		ifstream t1("7.txt");
-		t1.seekg(0, ios::end);
-		if (t1.tellg() > 4) {
+		t1.seekg(0, ios::end); // beg = 시작점, cur = 중간 지점, end =끝지점
+		if (t1.tellg() > 4) { // tellg() 파일 크기
 			cout << " 이미 내용 입력되어 있습니다. 새로운 내용을 입력하고 싶으면 스페이스바를 눌러주세요. 아니라면 스페이스바를 제외한 키를 눌러주세요." << endl;
 			int a = _getch();
 			if (a == 32) {
-				ofstream t("7.txt");
-				if (t.is_open()) {
-					cout << "내용을 입력해 주세요 : ";
-					cin.clear();
-					getline(cin, Note.work);
-				}
+				cout << "내용을 입력해 주세요 : ";
+				cin.clear();           //getline 버퍼 초기화(전체 버퍼 초기화)
+				getline(cin, Note.work);   // 공백 포함 문자열 쓰기
 				Note.b = 0;
-				t << Note.b << " " << Note.level << " " << Note.work;
-				t.close();
+				outF(Note, 6);
 				t1.close();
 				break;
 			}
 		}
 		else {
-			ofstream t("7.txt");
-			if (t.is_open()) {
-				cout << "내용을 입력해 주세요 : ";
-				cin.clear();
-				getline(cin, Note.work);
-			}
-			t << Note.b << " " << Note.level << " " << Note.work;
-			t.close();
-			t1.close();
+			cout << "내용을 입력해 주세요 : ";
+			cin.clear();           //getline 버퍼 초기화(전체 버퍼 초기화)
+			getline(cin, Note.work);   // 공백 포함 문자열 쓰기
+			Note.b = 0;
+			outF(Note, 6);
+			t1.close();		//파일 닫기
+			break;
 		}
-		break;
 	}
 	case 8: {
 		ifstream t1("8.txt");
-		t1.seekg(0, ios::end);
-		if (t1.tellg() > 4) {
+		t1.seekg(0, ios::end); // beg = 시작점, cur = 중간 지점, end =끝지점
+		if (t1.tellg() > 4) { // tellg() 파일 크기
 			cout << " 이미 내용 입력되어 있습니다. 새로운 내용을 입력하고 싶으면 스페이스바를 눌러주세요. 아니라면 스페이스바를 제외한 키를 눌러주세요." << endl;
 			int a = _getch();
 			if (a == 32) {
-				ofstream t("8.txt");
-				if (t.is_open()) {
-					cout << "내용을 입력해 주세요 : ";
-					cin.clear();
-					getline(cin, Note.work);
-				}
+				cout << "내용을 입력해 주세요 : ";
+				cin.clear();           //getline 버퍼 초기화(전체 버퍼 초기화)
+				getline(cin, Note.work);   // 공백 포함 문자열 쓰기
 				Note.b = 0;
-				t << Note.b << " " << Note.level << " " << Note.work;
-				t.close();
+				outF(Note, 7);
 				t1.close();
 				break;
 			}
 		}
 		else {
-			ofstream t("8.txt");
-			if (t.is_open()) {
-				cout << "내용을 입력해 주세요 : ";
-				cin.clear();
-				getline(cin, Note.work);
-			}
-			t << Note.b << " " << Note.level << " " << Note.work;
-			t.close();
-			t1.close();
+			cout << "내용을 입력해 주세요 : ";
+			cin.clear();           //getline 버퍼 초기화(전체 버퍼 초기화)
+			getline(cin, Note.work);   // 공백 포함 문자열 쓰기
+			Note.b = 0;
+			outF(Note, 7);
+			t1.close();		//파일 닫기
+			break;
 		}
-		break;
 	}
 	case 9: {
 		ifstream t1("9.txt");
-		t1.seekg(0, ios::end);
-		if (t1.tellg() > 4) {
+		t1.seekg(0, ios::end); // beg = 시작점, cur = 중간 지점, end =끝지점
+		if (t1.tellg() > 4) { // tellg() 파일 크기
 			cout << " 이미 내용 입력되어 있습니다. 새로운 내용을 입력하고 싶으면 스페이스바를 눌러주세요. 아니라면 스페이스바를 제외한 키를 눌러주세요." << endl;
 			int a = _getch();
 			if (a == 32) {
-				ofstream t("9.txt");
-				if (t.is_open()) {
-					cout << "내용을 입력해 주세요 : ";
-					cin.clear();
-					getline(cin, Note.work);
-				}
+				cout << "내용을 입력해 주세요 : ";
+				cin.clear();           //getline 버퍼 초기화(전체 버퍼 초기화)
+				getline(cin, Note.work);   // 공백 포함 문자열 쓰기
 				Note.b = 0;
-				t << Note.b << " " << Note.level << " " << Note.work;
-				t.close();
+				outF(Note, 8);
 				t1.close();
 				break;
 			}
 		}
 		else {
-			ofstream t("9.txt");
-			if (t.is_open()) {
-				cout << "내용을 입력해 주세요 : ";
-				cin.clear();
-				getline(cin, Note.work);
-			}
-			t << Note.b << " " << Note.level << " " << Note.work;
-			t.close();
-			t1.close();
+			cout << "내용을 입력해 주세요 : ";
+			cin.clear();           //getline 버퍼 초기화(전체 버퍼 초기화)
+			getline(cin, Note.work);   // 공백 포함 문자열 쓰기
+			Note.b = 0;
+			outF(Note, 8);
+			t1.close();		//파일 닫기
+			break;
 		}
-		break;
 	}
 	case 10: {
 		ifstream t1("10.txt");
-		t1.seekg(0, ios::end);
-		if (t1.tellg() > 4) {
+		t1.seekg(0, ios::end); // beg = 시작점, cur = 중간 지점, end =끝지점
+		if (t1.tellg() > 4) { // tellg() 파일 크기
 			cout << " 이미 내용 입력되어 있습니다. 새로운 내용을 입력하고 싶으면 스페이스바를 눌러주세요. 아니라면 스페이스바를 제외한 키를 눌러주세요." << endl;
 			int a = _getch();
 			if (a == 32) {
-				ofstream t("10.txt");
-				if (t.is_open()) {
-					cout << "내용을 입력해 주세요 : ";
-					cin.clear();
-					getline(cin, Note.work);
-				}
+				cout << "내용을 입력해 주세요 : ";
+				cin.clear();           //getline 버퍼 초기화(전체 버퍼 초기화)
+				getline(cin, Note.work);   // 공백 포함 문자열 쓰기
 				Note.b = 0;
-				t << Note.b << " " << Note.level << " " << Note.work;
-				t.close();
+				outF(Note, 9);
 				t1.close();
 				break;
 			}
 		}
 		else {
-			ofstream t("10.txt");
-			if (t.is_open()) {
-				cout << "내용을 입력해 주세요 : ";
-				cin.clear();
-				getline(cin, Note.work);
-			}
-			t << Note.b << " " << Note.level << " " << Note.work;
-			t.close();
-			t1.close();
+			cout << "내용을 입력해 주세요 : ";
+			cin.clear();           //getline 버퍼 초기화(전체 버퍼 초기화)
+			getline(cin, Note.work);   // 공백 포함 문자열 쓰기
+			Note.b = 0;
+			outF(Note, 9);
+			t1.close();		//파일 닫기
+			break;
 		}
-		break;
 	}
 	default: cout << "생성 가능한 일정의 개수를 초과했습니다. 1~10 사이의 숫자를 입력해주세요.";
 		break;
@@ -664,8 +594,8 @@ void Manual() {
 
 /*일정 값 가져오기*/
 void inF(ToDo* a, int i) {
-	switch (i + 1) {
-	case 1: {
+	switch (i) {
+	case 0: {
 		ifstream fin;
 		fin.open("1.txt");
 		fin >> a->b >> a->level;
@@ -673,7 +603,7 @@ void inF(ToDo* a, int i) {
 		fin.close();
 		break;
 	}
-	case 2: {
+	case 1: {
 		ifstream fin;
 		fin.open("2.txt");
 		fin >> a->b >> a->level;
@@ -681,7 +611,7 @@ void inF(ToDo* a, int i) {
 		fin.close();
 		break;
 	}
-	case 3: {
+	case 2: {
 		ifstream fin;
 		fin.open("3.txt");
 		fin >> a->b >> a->level;
@@ -689,14 +619,14 @@ void inF(ToDo* a, int i) {
 		fin.close();
 		break;
 	}
-	case 4: {
+	case 3: {
 		ifstream fin;
 		fin.open("4.txt");
 		fin >> a->b >> a->level;
 		getline(fin, a->work);
 		break;
 	}
-	case 5: {
+	case 4: {
 		ifstream fin;
 		fin.open("5.txt");
 		fin >> a->b >> a->level;
@@ -704,7 +634,7 @@ void inF(ToDo* a, int i) {
 		fin.close();
 		break;
 	}
-	case 6: {
+	case 5: {
 		ifstream fin;
 		fin.open("6.txt");
 		fin >> a->b >> a->level;
@@ -712,7 +642,7 @@ void inF(ToDo* a, int i) {
 		fin.close();
 		break;
 	}
-	case 7: {
+	case 6: {
 		ifstream fin;
 		fin.open("7.txt");
 		fin >> a->b >> a->level;
@@ -720,7 +650,7 @@ void inF(ToDo* a, int i) {
 		fin.close();
 		break;
 	}
-	case 8: {
+	case 7: {
 		ifstream fin;
 		fin.open("8.txt");
 		fin >> a->b >> a->level;
@@ -728,7 +658,7 @@ void inF(ToDo* a, int i) {
 		fin.close();
 		break;
 	}
-	case 9: {
+	case 8: {
 		ifstream fin;
 		fin.open("9.txt");
 		fin >> a->b >> a->level;
@@ -736,7 +666,7 @@ void inF(ToDo* a, int i) {
 		fin.close();
 		break;
 	}
-	case 10: {
+	case 9: {
 		ifstream fin;
 		fin.open("10.txt");
 		fin >> a->b >> a->level;
@@ -752,71 +682,71 @@ void inF(ToDo* a, int i) {
 
 /*일정 값 내보내기*/
 void outF(ToDo a, int i) {
-	switch (i + 1) {
-	case 1: {
+	switch (i) {
+	case 0: {
 		ofstream fout("1.txt");
 		cin.clear();
 		fout << a.b << " " << a.level << " " << a.work;
 		fout.close();
 		break;
 	}
-	case 2: {
+	case 1: {
 		ofstream fout("2.txt");
 		cin.clear();
 		fout << a.b << " " << a.level << " " << a.work;
 		fout.close();
 		break;
 	}
-	case 3: {
+	case 2: {
 		ofstream fout("3.txt");
 		cin.clear();
 		fout << a.b << " " << a.level << " " << a.work;
 		fout.close();
 		break;
 	}
-	case 4: {
+	case 3: {
 		ofstream fout("4.txt");
 		cin.clear();
 		fout << a.b << " " << a.level << " " << a.work;
 		fout.close();
 		break;
 	}
-	case 5: {
+	case 4: {
 		ofstream fout("5.txt");
 		cin.clear();
 		fout << a.b << " " << a.level << " " << a.work;
 		fout.close();
 		break;
 	}
-	case 6: {
+	case 5: {
 		ofstream fout("6.txt");
 		cin.clear();
 		fout << a.b << " " << a.level << " " << a.work;
 		fout.close();
 		break;
 	}
-	case 7: {
+	case 6: {
 		ofstream fout("7.txt");
 		cin.clear();
 		fout << a.b << " " << a.level << " " << a.work;
 		fout.close();
 		break;
 	}
-	case 8: {
+	case 7: {
 		ofstream fout("8.txt");
 		cin.clear();
 		fout << a.b << " " << a.level << " " << a.work;
 		fout.close();
 		break;
 	}
-	case 9: {
+	case 8: {
 		ofstream fout("9.txt");
 		cin.clear();
 		fout << a.b << " " << a.level << " " << a.work;
 		fout.close();
 		break;
 	}
-	case 10: {
+	case 9: {
 		ofstream fout("10.txt");
 		cin.clear();
 		fout << a.b << " " << a.level << " " << a.work;
@@ -882,11 +812,15 @@ void ScheduleComplete() {
 	if (sch.b == 204) {
 		cout << "일정이 없습니다." << endl;
 	}
-	else {
+	else if (sch.b == false) {
 		sch.b = true;
 		cout << "완료 되었습니다." << endl;
-		outF(sch, i);
 	}
+	else if (sch.b == true) {
+		sch.b = false;
+		cout << "취소 되었습니다." << endl;
+	}
+	outF(sch, i);
 }
 
 void inputlist() {
