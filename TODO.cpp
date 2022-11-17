@@ -538,6 +538,7 @@ void calendar() {
 
 /*메뉴얼 UI*/
 void Manual() {
+	system("title 메뉴얼");
 	system("cls");
 	system(" mode con lines=70 cols=100");
 	//cout << "□■■■□■■■■■□□■■■■■□□■■■■■○○■■■■■□□■■■■■□□■■■■■□■■■□" << endl;
@@ -569,27 +570,32 @@ void Manual() {
 	cout << "■" << setw(8) << "■" << setw(6) << "■" << setw(8) << "■" << setw(6) << "■" << setw(8) << "■" << setw(12) << "■■■" << setw(8) << "■" << setw(8) << "■" << setw(14) << "■■■■■";
 
 	gotoxy(24, 12);
-	cout << "일정 추가";
+	cout << "일정 추가 : A or a";
 	gotoxy(24, 13);
 	cout << "사용자가 입력한 일정을 추가하는 명령어";
 
 	gotoxy(24, 16);
-	cout << "일정 삭제";
+	cout << "일정 삭제 : D or d";
 	gotoxy(24, 17);
 	cout << "일정을 삭제하는 명령어";
 
 	gotoxy(24, 20);
-	cout << "일정 완료";
+	cout << "일정 완료 : F or f";
 	gotoxy(24, 21);
 	cout << "일정을 완료 시켜주는 명령어";
 
 	gotoxy(24, 24);
-	cout << "돌아가기";
+	cout << "메인메뉴 M or m";
 	gotoxy(24, 25);
-	cout << "세부메뉴 / 달력 / 메인메뉴로 돌아가는 명령어";
+	cout << "메인메뉴로 돌아가는 명령어";
+
+	gotoxy(24, 28);
+	cout << "종료 E or e";
+	gotoxy(24, 29);
+	cout << "프로그램 종료하는 명령어";
 
 	gotoxy(0, 64);
-	cin >> NUM2;
+	NUM2 = _getch();
 }
 
 /*일정 값 가져오기*/
@@ -671,7 +677,7 @@ void inF(ToDo* a, int i) {
 		fin.open("10.txt");
 		fin >> a->b >> a->level;
 		getline(fin, a->work);
-		fin.close();	
+		fin.close();
 		break;
 	}
 	default: {
@@ -877,13 +883,13 @@ void mainmemu() { // 메인화면 출력
 
 /*서브 화면*/
 void submemu() {
-	system("cls");	
+	system("cls");
 	system("mode con: cols=100 lines=70");
 	ToDo a[10];
 	string num3[10];
 	int num4[10];
 	for (int i = 0; i < 10; i++) {
-		int num5=0;
+		int num5 = 0;
 		inF(&a[num5], num5);
 
 		if (a[num5].b != 204) {
@@ -891,7 +897,7 @@ void submemu() {
 			num4[num5] = a[num5].level;
 		}
 		num5++;
-	}	
+	}
 	time_t timer = time(NULL);
 	struct tm* t = localtime(&timer);
 	struct tm {
@@ -910,8 +916,8 @@ void submemu() {
 	for (int i = 0; i < 10; i++) {
 		cout << "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■" << endl;
 		cout << setw(6) << "■" << endl;
-		if((num4[i]!=204) && (num3[i]!=""))
-			cout << " "<< num4[i] << setw(4) << "■" << num3[i] << endl;
+		if ((num4[i] != 204) && (num3[i] != ""))
+			cout << " " << num4[i] << setw(4) << "■" << num3[i] << endl;
 		else
 			cout << setw(6) << "■" << endl;
 		cout << setw(6) << "■" << endl;
@@ -942,23 +948,23 @@ void move() {
 
 /*화면 전환*/
 int submove() {
-		int num2 = NULL; //화면이동 변수
-		submemu();
-		num2 = _getch();	//화면이동 입력
-		if (num2 ==  77 || num2 == 109) return 0;		// 메인메뉴로 이동
-		switch (num2) {
-		case 65: listadd(); break;		// 명령어 A 아스키 코드
-		case 70: ScheduleComplete(); break;		// 명령어 F 아스키 코드
-		case 68: listdelete(); break;		// 명령어 D 아스키 코드
-		case 67: Manual(); break;		// 명령어 M 아스키 코드
-		case 69: exit(0); break;		// 명령어 E 아스키 코드
-		case 97: listadd(); break;		// 명령어 a 아스키 코드
-		case 102: ScheduleComplete(); break;		// 명령어 f 아스키 코드
-		case 100: listdelete(); break;		// 명령어 d 아스키 코드
-		case 99: Manual(); break;		// 명령어 m 아스키 코드
-		case 101: exit(0); break;		// 명령어 e 아스키 코드
-		default: cout << "잘못된 명령어 입니다. 다시 입력해주세요"; break;
-		}
+	int num2 = NULL; //화면이동 변수
+	submemu();
+	num2 = _getch();	//화면이동 입력
+	if (num2 == 77 || num2 == 109) return 0;		// 메인메뉴로 이동
+	switch (num2) {
+	case 65: listadd(); break;		// 명령어 A 아스키 코드
+	case 70: ScheduleComplete(); break;		// 명령어 F 아스키 코드
+	case 68: listdelete(); break;		// 명령어 D 아스키 코드
+	case 67: Manual(); break;		// 명령어 M 아스키 코드
+	case 69: exit(0); break;		// 명령어 E 아스키 코드
+	case 97: listadd(); break;		// 명령어 a 아스키 코드
+	case 102: ScheduleComplete(); break;		// 명령어 f 아스키 코드
+	case 100: listdelete(); break;		// 명령어 d 아스키 코드
+	case 99: Manual(); break;		// 명령어 m 아스키 코드
+	case 101: exit(0); break;		// 명령어 e 아스키 코드
+	default: cout << "잘못된 명령어 입니다. 다시 입력해주세요"; break;
+	}
 }
 
 
