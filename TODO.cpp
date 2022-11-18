@@ -821,12 +821,13 @@ void ScheduleComplete() {
 	else if (sch.b == false) {
 		sch.b = true;
 		cout << "완료 되었습니다." << endl;
+		outF(sch, i);
 	}
 	else if (sch.b == true) {
 		sch.b = false;
 		cout << "취소 되었습니다." << endl;
+		outF(sch, i);
 	}
-	outF(sch, i);
 }
 
 void inputlist() {
