@@ -48,8 +48,8 @@ void listadd() {
 				t1.close();
 				cout << "일정 내용이 수정되었습니다!!";
 				Sleep(1500);		// 1500ms(1.5초) 정지
-				break;
 			}
+			break;
 		}
 		else {
 			cout << "내용을 입력해 주세요 >> ";
@@ -78,8 +78,9 @@ void listadd() {
 				t1.close();
 				cout << "일정 내용이 수정되었습니다!!";
 				Sleep(1500);
-				break;
+
 			}
+			break;
 		}
 		else {
 			cout << "내용을 입력해 주세요 >> ";
@@ -108,8 +109,8 @@ void listadd() {
 				t1.close();
 				cout << "일정 내용이 수정되었습니다!!";
 				Sleep(1500);
-				break;
 			}
+				break;
 		}
 		else {
 			cout << "내용을 입력해 주세요 >> ";
@@ -138,8 +139,8 @@ void listadd() {
 				t1.close();
 				cout << "일정 내용이 수정되었습니다!!";
 				Sleep(1500);
-				break;
 			}
+				break;
 		}
 		else {
 			cout << "내용을 입력해 주세요 >> ";
@@ -168,8 +169,8 @@ void listadd() {
 				t1.close();
 				cout << "일정 내용이 수정되었습니다!!";
 				Sleep(1500);
-				break;
 			}
+				break;
 		}
 		else {
 			cout << "내용을 입력해 주세요 >> ";
@@ -198,8 +199,8 @@ void listadd() {
 				t1.close();
 				cout << "일정 내용이 수정되었습니다!!";
 				Sleep(1500);
-				break;
 			}
+				break;
 		}
 		else {
 			cout << "내용을 입력해 주세요 >> ";
@@ -228,8 +229,8 @@ void listadd() {
 				t1.close();
 				cout << "일정 내용이 수정되었습니다!!";
 				Sleep(1500);
-				break;
 			}
+				break;
 		}
 		else {
 			cout << "내용을 입력해 주세요 >> ";
@@ -258,8 +259,8 @@ void listadd() {
 				t1.close();
 				cout << "일정 내용이 수정되었습니다!!";
 				Sleep(1500);
-				break;
 			}
+				break;
 		}
 		else {
 			cout << "내용을 입력해 주세요 >> ";
@@ -288,8 +289,8 @@ void listadd() {
 				t1.close();
 				cout << "일정 내용이 수정되었습니다!!";
 				Sleep(1500);
-				break;
 			}
+				break;
 		}
 		else {
 			cout << "내용을 입력해 주세요 >> ";
@@ -318,8 +319,8 @@ void listadd() {
 				t1.close();
 				cout << "일정 내용이 수정되었습니다!!";
 				Sleep(1500);
-				break;
 			}
+				break;
 		}
 		else {
 			cout << "내용을 입력해 주세요 >> ";
@@ -667,11 +668,11 @@ void inF(ToDo* a, int i) {
 	char t;
 	switch (i) {
 	case 0: {
-		ifstream fin("1.txt");
-		fin >> a->b >> t >> a->level >> t;
-		getline(fin, a->work);
-		fin.close();
-		break;
+		ifstream fin("1.txt");		//파일 열기
+		fin >> a->b >> t >> a->level >> t;		//값 받아오기
+		getline(fin, a->work);		//값 받아오기(문자열)
+		fin.close();		//파일 닫기
+		break;		//switch 탈출
 	}
 	case 1: {
 		ifstream fin("2.txt");
@@ -746,11 +747,11 @@ void inF(ToDo* a, int i) {
 void outF(ToDo a, int i) {
 	switch (i) {
 	case 0: {
-		ofstream fout("1.txt");
-		cin.clear();
-		fout << a.b << "/" << a.level << "/" << a.work;
-		fout.close();
-		break;
+		ofstream fout("1.txt");		//파일 열기
+		cin.clear();		//버퍼 초기화
+		fout << a.b << "/" << a.level << "/" << a.work;		//파일 저장
+		fout.close();		//파일 닫기
+		break;		//switch 탈출
 	}
 	case 1: {
 		ofstream fout("2.txt");
@@ -828,7 +829,7 @@ void Progress() {
 
 	//-------------------메모장에서 값 받아오기--------------------
 	for (int i = 0; i < 10; i++) {
-		inF(&sch[i], i);
+		inF(&sch[i], i);	//sch에 1~10메모장 입력
 	}
 	//-----------------------------------------------------------
 
@@ -836,29 +837,29 @@ void Progress() {
 
 	for (int i = 0; i < 10; i++) {
 		if (sch[i].b == true) {
-			a++; b++;	//a완료된 수, b전체 일정수 
+			a++; b++;	//a완료된 일정의 수, b전체 일정의 수 
 		}
 		else if (sch[i].b == false) {
-			b++;
+			b++;		//b전체 일정의 수
 		}
 
 	}
-	c = (double)a / b * 100;
+	c = (double)a / b * 100;		//진척도 식을 이용해서 값을 c에 저장
 	//-----------------------------------------------------------
 
 	//-----------------------진척도 표 출력-----------------------
 	cout << round(c) << "%" << endl;
 	for (int i = 0; i < 10; i++) {
-		if (i < round(c / 10)) {
-			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 2);
+		if (i < round(c / 10)) {		//round 반올림 함수, c에 10을나누고 반올림 해서 i와 비교 가능하게 만들어줌
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 2);		//글자색 변경
 			cout << "■";
 		}
 		else {
-			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);		//글자색 변경
 			cout << "■";
 		}
 	}
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);		//글자색 변경
 	//-----------------------------------------------------------
 }
 
