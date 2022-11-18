@@ -78,7 +78,6 @@ void listadd() {
 				t1.close();
 				cout << "일정 내용이 수정되었습니다!!";
 				Sleep(1500);
-
 			}
 			break;
 		}
@@ -110,7 +109,7 @@ void listadd() {
 				cout << "일정 내용이 수정되었습니다!!";
 				Sleep(1500);
 			}
-				break;
+			break;
 		}
 		else {
 			cout << "내용을 입력해 주세요 >> ";
@@ -140,7 +139,7 @@ void listadd() {
 				cout << "일정 내용이 수정되었습니다!!";
 				Sleep(1500);
 			}
-				break;
+			break;
 		}
 		else {
 			cout << "내용을 입력해 주세요 >> ";
@@ -170,7 +169,7 @@ void listadd() {
 				cout << "일정 내용이 수정되었습니다!!";
 				Sleep(1500);
 			}
-				break;
+			break;
 		}
 		else {
 			cout << "내용을 입력해 주세요 >> ";
@@ -200,7 +199,7 @@ void listadd() {
 				cout << "일정 내용이 수정되었습니다!!";
 				Sleep(1500);
 			}
-				break;
+			break;
 		}
 		else {
 			cout << "내용을 입력해 주세요 >> ";
@@ -230,7 +229,7 @@ void listadd() {
 				cout << "일정 내용이 수정되었습니다!!";
 				Sleep(1500);
 			}
-				break;
+			break;
 		}
 		else {
 			cout << "내용을 입력해 주세요 >> ";
@@ -260,7 +259,7 @@ void listadd() {
 				cout << "일정 내용이 수정되었습니다!!";
 				Sleep(1500);
 			}
-				break;
+			break;
 		}
 		else {
 			cout << "내용을 입력해 주세요 >> ";
@@ -290,7 +289,7 @@ void listadd() {
 				cout << "일정 내용이 수정되었습니다!!";
 				Sleep(1500);
 			}
-				break;
+			break;
 		}
 		else {
 			cout << "내용을 입력해 주세요 >> ";
@@ -320,7 +319,7 @@ void listadd() {
 				cout << "일정 내용이 수정되었습니다!!";
 				Sleep(1500);
 			}
-				break;
+			break;
 		}
 		else {
 			cout << "내용을 입력해 주세요 >> ";
@@ -670,9 +669,9 @@ void inF(ToDo* a, int i) {
 	case 0: {
 		ifstream fin("1.txt");		//파일 열기
 		fin >> a->b >> t >> a->level >> t;		//값 받아오기
-		getline(fin, a->work);		//값 받아오기(문자열)
+		getline(fin, a->work);	//값 받아오기(문자열)
 		fin.close();		//파일 닫기
-		break;		//switch 탈출
+		break;
 	}
 	case 1: {
 		ifstream fin("2.txt");
@@ -751,7 +750,7 @@ void outF(ToDo a, int i) {
 		cin.clear();		//버퍼 초기화
 		fout << a.b << "/" << a.level << "/" << a.work;		//파일 저장
 		fout.close();		//파일 닫기
-		break;		//switch 탈출
+		break;
 	}
 	case 1: {
 		ofstream fout("2.txt");
@@ -829,7 +828,7 @@ void Progress() {
 
 	//-------------------메모장에서 값 받아오기--------------------
 	for (int i = 0; i < 10; i++) {
-		inF(&sch[i], i);	//sch에 1~10메모장 입력
+		inF(&sch[i], i);
 	}
 	//-----------------------------------------------------------
 
@@ -837,29 +836,29 @@ void Progress() {
 
 	for (int i = 0; i < 10; i++) {
 		if (sch[i].b == true) {
-			a++; b++;	//a완료된 일정의 수, b전체 일정의 수 
+			a++; b++;	//a완료된 수, b전체 일정수 
 		}
 		else if (sch[i].b == false) {
-			b++;		//b전체 일정의 수
+			b++;
 		}
 
 	}
-	c = (double)a / b * 100;		//진척도 식을 이용해서 값을 c에 저장
+	c = (double)a / b * 100;
 	//-----------------------------------------------------------
 
 	//-----------------------진척도 표 출력-----------------------
 	cout << round(c) << "%" << endl;
 	for (int i = 0; i < 10; i++) {
-		if (i < round(c / 10)) {		//round 반올림 함수, c에 10을나누고 반올림 해서 i와 비교 가능하게 만들어줌
-			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 2);		//글자색 변경
+		if (i < round(c / 10)) {
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 2);
 			cout << "■";
 		}
 		else {
-			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);		//글자색 변경
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
 			cout << "■";
 		}
 	}
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);		//글자색 변경
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
 	//-----------------------------------------------------------
 }
 
@@ -893,7 +892,7 @@ void listcomplete() {
 int submove();		// 서브 메뉴 화면 이동 선언
 
 /*메인 화면*/
-void mainmemu() {
+void mainmenu() {
 	system("cls");//화면 클리어 
 	system("mode con cols=100 lines=70"); //콘솔 100*70
 
@@ -936,7 +935,7 @@ void mainmemu() {
 }
 
 /*서브 화면*/
-void submemu() {
+void submenu() {
 	system("cls");		// 화면 클리어
 	system("mode con: cols=100 lines=70");		// 콘솔 100*70
 
@@ -965,16 +964,27 @@ void submemu() {
 		if (a[i].b != 204) {			// 일정 완료가 공백이 아니고
 			if (a[i].b == true) {		// 완료 상태이면
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 2);		// 콘솔 글자 색 변경
-				cout << " " << a[i].level << setw(4);
-				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-				cout << "■";
-				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 2);
-				cout << a[i].work << endl;
-				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+				if (i != 9) {
+					cout << " " << a[i].level << setw(4);
+					SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+					cout << "■";
+					SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 2);
+					cout << a[i].work << endl;
+					SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+				}
+				else {
+					cout << " " << a[i].level << setw(3);
+					SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+					cout << "■";
+					SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 2);
+					cout << a[i].work << endl;
+					SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+				}
 			}
 			else if (a[i].b == false) {		// 미완료 상태이면
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-				cout << " " << a[i].level << setw(4) << "■" << a[i].work << endl;
+				if (i == 9) { cout << " " << a[i].level << setw(3) << "■" << a[i].work << endl; }
+				else { cout << " " << a[i].level << setw(4) << "■" << a[i].work << endl; }
 			}
 		}
 		else		// 공백이면 == 일정이 없다면
@@ -992,13 +1002,13 @@ void submemu() {
 /*화면 전환2*/
 void move() {
 	int num1 = 0; //화면이동 변수
-	mainmemu();
+	mainmenu();
 	num1 = _getch(); // = system("pause"); 키 입력 받으면 이동
 	switch (num1) {
 	case 67: calendar(); break;		// 명령어 C 아스키 코드
-	case 68: while (submove() != 0); { submove(); } break;		// 명령어 D 아스키 코드, 메인 메뉴 이동 전까지 submove에서 무한 반복
+	case 68: while (submove() != 0) { submove(); } break;		// 명령어 D 아스키 코드, 메인 메뉴 이동 전까지 submove에서 무한 반복
 	case 99: calendar(); break;		// 명령어 c 아스키 코드
-	case 100: while (submove() != 0); { submove(); } break;		// 명령어 d 아스키 코드
+	case 100: while (submove() != 0) { submove(); } break;		// 명령어 d 아스키 코드
 	}
 }
 
@@ -1006,7 +1016,7 @@ void move() {
 int submove() {
 	int num2 = 0; //화면이동 변수
 	system("title 일일 목록");		// 콘솔 창 제목 수정
-	submemu();
+	submenu();
 	
 	num2 = _getch();	// 화면 이동 값 입력
 
@@ -1016,14 +1026,14 @@ int submove() {
 	case 68: listdelete(); break;		// 명령어 D 아스키 코드
 	case 69: exit(0); break;		// 명령어 E 아스키 코드
 	case 70: listcomplete(); break;		// 명령어 F 아스키 코드
-	case 77: return 0; break;		// 명령어 M 아스키 코드
+	case 77: return 0;		// 명령어 M 아스키 코드
 
 	case 97: listadd(); break;		// 명령어 a 아스키 코드
 	case 99: Manual(); break;		// 명령어 c 아스키 코드
 	case 100: listdelete(); break;		// 명령어 d 아스키 코드
 	case 101: exit(0); break;		// 명령어 e 아스키 코드
 	case 102: listcomplete(); break;		// 명령어 f 아스키 코드
-	case 109: return 0; break;		// 명령어 m 아스키 코드
+	case 109: return 0;		// 명령어 m 아스키 코드
 	default: cout << "잘못된 명령어입니다. 아무 키나 입력하세요 >> "; num2 = _getch(); break;
 
 	}
