@@ -5,14 +5,8 @@
 #include <fstream> //파일 사용
 #include <string> //getline() 사용
 #include <conio.h> //_getch() 함수는 사용자가 입력한 키에 대한 값을 아스키코드로 반환
-#include "time.h"
-#define SPACE 32
-#define D 68
-#define d 100
-#define M 77
-#define m 109
-//#define C 67
-//#define c 99
+#include <ctime>
+
 using namespace std;
 
 class ToDo {
@@ -22,8 +16,9 @@ public:
 	string work; //문자열 받기
 };
 
-ToDo Note;
-void outF(ToDo, int);	//일정 추가에서 사용하기위해서 선언해줌
+ToDo Note;		// 일정을 담당하는 ToDo 클래스 타입의 Note 객체 생성
+
+void outF(ToDo, int);	//일정 추가 사용을 위해 선언
 
 void gotoxy(int x, int y) {
 	COORD pos;
@@ -33,8 +28,8 @@ void gotoxy(int x, int y) {
 }
 /*일정 추가*/
 void listadd() {
-	cout << "생성할 일정의 순위를 입력해 주세요 : ";
-	cin >> Note.level;
+	cout << "생성할 일정의 번호를 입력해 주세요 >> ";
+	cin >> Note.level;		// 일정 번호 입력
 	cin.ignore(); //위의 cin 버퍼 지우기 안쓰면 getline()이 돌아가지 않음.
 
 	switch (Note.level) {
@@ -42,259 +37,299 @@ void listadd() {
 		ifstream t1("1.txt");
 		t1.seekg(0, ios::end); // beg = 시작점, cur = 중간 지점, end =끝지점
 		if (t1.tellg() > 4) { // tellg() 파일 크기
-			cout << " 이미 내용 입력되어 있습니다. 새로운 내용을 입력하고 싶으면 스페이스바를 눌러주세요. 아니라면 스페이스바를 제외한 키를 눌러주세요." << endl;
+			cout << "이미 내용 입력되어 있습니다. \n새로운 내용 입력 : 'space' \t\t\t취소 : 아무 키" << endl;
 			int a = _getch();
 			if (a == 32) {
-				cout << "내용을 입력해 주세요 : ";
+				cout << "내용을 입력해 주세요 >> ";
 				cin.clear();           //getline 버퍼 초기화(전체 버퍼 초기화)
 				getline(cin, Note.work);   // 공백 포함 문자열 쓰기
 				Note.b = 0;
 				outF(Note, 0);
 				t1.close();
+				cout << "일정 내용이 수정되었습니다!!";
+				Sleep(1500);		// 1500ms(1.5초) 정지
 				break;
 			}
 		}
 		else {
-			cout << "내용을 입력해 주세요 : ";
+			cout << "내용을 입력해 주세요 >> ";
 			cin.clear();           //getline 버퍼 초기화(전체 버퍼 초기화)
 			getline(cin, Note.work);   // 공백 포함 문자열 쓰기
 			Note.b = 0;
 			outF(Note, 0);
 			t1.close();	//파일 닫기
+			cout << "일정이 정상적으로 생성 되었습니다!!";
+			Sleep(1500);		// 1500ms(1.5초) 정지
 			break;
 		}
 	}
 	case 2: {
 		ifstream t1("2.txt");
-		t1.seekg(0, ios::end); // beg = 시작점, cur = 중간 지점, end =끝지점
-		if (t1.tellg() > 4) { // tellg() 파일 크기
-			cout << " 이미 내용 입력되어 있습니다. 새로운 내용을 입력하고 싶으면 스페이스바를 눌러주세요. 아니라면 스페이스바를 제외한 키를 눌러주세요." << endl;
+		t1.seekg(0, ios::end); 
+		if (t1.tellg() > 4) { 
+			cout << "이미 내용 입력되어 있습니다. \n새로운 내용 입력 : 'space' \t\t\t취소 : 아무 키" << endl;
 			int a = _getch();
 			if (a == 32) {
-				cout << "내용을 입력해 주세요 : ";
-				cin.clear();           //getline 버퍼 초기화(전체 버퍼 초기화)
-				getline(cin, Note.work);   // 공백 포함 문자열 쓰기
+				cout << "내용을 입력해 주세요 >> ";
+				cin.clear();          
+				getline(cin, Note.work);   
 				Note.b = 0;
 				outF(Note, 1);
 				t1.close();
+				cout << "일정 내용이 수정되었습니다!!";
+				Sleep(1500);
 				break;
 			}
 		}
 		else {
-			cout << "내용을 입력해 주세요 : ";
-			cin.clear();           //getline 버퍼 초기화(전체 버퍼 초기화)
-			getline(cin, Note.work);   // 공백 포함 문자열 쓰기
+			cout << "내용을 입력해 주세요 >> ";
+			cin.clear();           
+			getline(cin, Note.work);  
 			Note.b = 0;
 			outF(Note, 1);
-			t1.close();		//파일 닫기
+			t1.close();		
+			cout << "일정이 정상적으로 생성 되었습니다!!";
+			Sleep(1500);		
 			break;
 		}
 	}
 	case 3: {
 		ifstream t1("3.txt");
-		t1.seekg(0, ios::end); // beg = 시작점, cur = 중간 지점, end =끝지점
-		if (t1.tellg() > 4) { // tellg() 파일 크기
-			cout << " 이미 내용 입력되어 있습니다. 새로운 내용을 입력하고 싶으면 스페이스바를 눌러주세요. 아니라면 스페이스바를 제외한 키를 눌러주세요." << endl;
+		t1.seekg(0, ios::end); 
+		if (t1.tellg() > 4) { 
+			cout << "이미 내용 입력되어 있습니다. \n새로운 내용 입력 : 'space' \t\t\t취소 : 아무 키" << endl;
 			int a = _getch();
 			if (a == 32) {
-				cout << "내용을 입력해 주세요 : ";
-				cin.clear();           //getline 버퍼 초기화(전체 버퍼 초기화)
-				getline(cin, Note.work);   // 공백 포함 문자열 쓰기
+				cout << "내용을 입력해 주세요 >> ";
+				cin.clear();          
+				getline(cin, Note.work);  
 				Note.b = 0;
 				outF(Note, 2);
 				t1.close();
+				cout << "일정 내용이 수정되었습니다!!";
+				Sleep(1500);
 				break;
 			}
 		}
 		else {
-			cout << "내용을 입력해 주세요 : ";
-			cin.clear();           //getline 버퍼 초기화(전체 버퍼 초기화)
-			getline(cin, Note.work);   // 공백 포함 문자열 쓰기
+			cout << "내용을 입력해 주세요 >> ";
+			cin.clear();           
+			getline(cin, Note.work);  
 			Note.b = 0;
 			outF(Note, 2);
-			t1.close();		//파일 닫기
+			t1.close();		
+			cout << "일정이 정상적으로 생성 되었습니다!!";
+			Sleep(1500);		
 			break;
 		}
 	}
 	case 4: {
 		ifstream t1("4.txt");
-		t1.seekg(0, ios::end); // beg = 시작점, cur = 중간 지점, end =끝지점
-		if (t1.tellg() > 4) { // tellg() 파일 크기
-			cout << " 이미 내용 입력되어 있습니다. 새로운 내용을 입력하고 싶으면 스페이스바를 눌러주세요. 아니라면 스페이스바를 제외한 키를 눌러주세요." << endl;
+		t1.seekg(0, ios::end); 
+		if (t1.tellg() > 4) { 
+			cout << "이미 내용 입력되어 있습니다. \n새로운 내용 입력 : 'space' \t\t\t취소 : 아무 키" << endl;
 			int a = _getch();
 			if (a == 32) {
-				cout << "내용을 입력해 주세요 : ";
-				cin.clear();           //getline 버퍼 초기화(전체 버퍼 초기화)
-				getline(cin, Note.work);   // 공백 포함 문자열 쓰기
+				cout << "내용을 입력해 주세요 >> ";
+				cin.clear();          
+				getline(cin, Note.work);  
 				Note.b = 0;
 				outF(Note, 3);
 				t1.close();
+				cout << "일정 내용이 수정되었습니다!!";
+				Sleep(1500);
 				break;
 			}
 		}
 		else {
-			cout << "내용을 입력해 주세요 : ";
-			cin.clear();           //getline 버퍼 초기화(전체 버퍼 초기화)
-			getline(cin, Note.work);   // 공백 포함 문자열 쓰기
+			cout << "내용을 입력해 주세요 >> ";
+			cin.clear();        
+			getline(cin, Note.work);  
 			Note.b = 0;
 			outF(Note, 3);
-			t1.close();		//파일 닫기
+			t1.close();		
+			cout << "일정이 정상적으로 생성 되었습니다!!";
+			Sleep(1500);		
 			break;
 		}
 	}
 	case 5: {
 		ifstream t1("5.txt");
-		t1.seekg(0, ios::end); // beg = 시작점, cur = 중간 지점, end =끝지점
-		if (t1.tellg() > 4) { // tellg() 파일 크기
-			cout << " 이미 내용 입력되어 있습니다. 새로운 내용을 입력하고 싶으면 스페이스바를 눌러주세요. 아니라면 스페이스바를 제외한 키를 눌러주세요." << endl;
+		t1.seekg(0, ios::end); 
+		if (t1.tellg() > 4) { 
+			cout << "이미 내용 입력되어 있습니다. \n새로운 내용 입력 : 'space' \t\t\t취소 : 아무 키" << endl;
 			int a = _getch();
 			if (a == 32) {
-				cout << "내용을 입력해 주세요 : ";
-				cin.clear();           //getline 버퍼 초기화(전체 버퍼 초기화)
-				getline(cin, Note.work);   // 공백 포함 문자열 쓰기
+				cout << "내용을 입력해 주세요 >> ";
+				cin.clear();        
+				getline(cin, Note.work);  
 				Note.b = 0;
 				outF(Note, 4);
 				t1.close();
+				cout << "일정 내용이 수정되었습니다!!";
+				Sleep(1500);
 				break;
 			}
 		}
 		else {
-			cout << "내용을 입력해 주세요 : ";
-			cin.clear();           //getline 버퍼 초기화(전체 버퍼 초기화)
-			getline(cin, Note.work);   // 공백 포함 문자열 쓰기
+			cout << "내용을 입력해 주세요 >> ";
+			cin.clear();          
+			getline(cin, Note.work);  
 			Note.b = 0;
 			outF(Note, 4);
-			t1.close();		//파일 닫기
+			t1.close();		
+			cout << "일정이 정상적으로 생성 되었습니다!!";
+			Sleep(1500);	
 			break;
 		}
 	}
 	case 6: {
 		ifstream t1("6.txt");
-		t1.seekg(0, ios::end); // beg = 시작점, cur = 중간 지점, end =끝지점
-		if (t1.tellg() > 4) { // tellg() 파일 크기
-			cout << " 이미 내용 입력되어 있습니다. 새로운 내용을 입력하고 싶으면 스페이스바를 눌러주세요. 아니라면 스페이스바를 제외한 키를 눌러주세요." << endl;
+		t1.seekg(0, ios::end); 
+		if (t1.tellg() > 4) { 
+			cout << "이미 내용 입력되어 있습니다. \n새로운 내용 입력 : 'space' \t\t\t취소 : 아무 키" << endl;
 			int a = _getch();
 			if (a == 32) {
-				cout << "내용을 입력해 주세요 : ";
-				cin.clear();           //getline 버퍼 초기화(전체 버퍼 초기화)
-				getline(cin, Note.work);   // 공백 포함 문자열 쓰기
+				cout << "내용을 입력해 주세요 >> ";
+				cin.clear();          
+				getline(cin, Note.work);   
 				Note.b = 0;
 				outF(Note, 5);
 				t1.close();
+				cout << "일정 내용이 수정되었습니다!!";
+				Sleep(1500);
 				break;
 			}
 		}
 		else {
-			cout << "내용을 입력해 주세요 : ";
-			cin.clear();           //getline 버퍼 초기화(전체 버퍼 초기화)
-			getline(cin, Note.work);   // 공백 포함 문자열 쓰기
+			cout << "내용을 입력해 주세요 >> ";
+			cin.clear();         
+			getline(cin, Note.work);   
 			Note.b = 0;
 			outF(Note, 5);
-			t1.close();		//파일 닫기
+			t1.close();		
+			cout << "일정이 정상적으로 생성 되었습니다!!";
+			Sleep(1500);		
 			break;
 		}
 	}
 	case 7: {
 		ifstream t1("7.txt");
-		t1.seekg(0, ios::end); // beg = 시작점, cur = 중간 지점, end =끝지점
-		if (t1.tellg() > 4) { // tellg() 파일 크기
-			cout << " 이미 내용 입력되어 있습니다. 새로운 내용을 입력하고 싶으면 스페이스바를 눌러주세요. 아니라면 스페이스바를 제외한 키를 눌러주세요." << endl;
+		t1.seekg(0, ios::end); 
+		if (t1.tellg() > 4) {
+			cout << "이미 내용 입력되어 있습니다. \n새로운 내용 입력 : 'space' \t\t\t취소 : 아무 키" << endl;
 			int a = _getch();
 			if (a == 32) {
-				cout << "내용을 입력해 주세요 : ";
-				cin.clear();           //getline 버퍼 초기화(전체 버퍼 초기화)
-				getline(cin, Note.work);   // 공백 포함 문자열 쓰기
+				cout << "내용을 입력해 주세요 >> ";
+				cin.clear();          
+				getline(cin, Note.work); 
 				Note.b = 0;
 				outF(Note, 6);
 				t1.close();
+				cout << "일정 내용이 수정되었습니다!!";
+				Sleep(1500);
 				break;
 			}
 		}
 		else {
-			cout << "내용을 입력해 주세요 : ";
-			cin.clear();           //getline 버퍼 초기화(전체 버퍼 초기화)
-			getline(cin, Note.work);   // 공백 포함 문자열 쓰기
+			cout << "내용을 입력해 주세요 >> ";
+			cin.clear();         
+			getline(cin, Note.work);  
 			Note.b = 0;
 			outF(Note, 6);
-			t1.close();		//파일 닫기
+			t1.close();		
+			cout << "일정이 정상적으로 생성 되었습니다!!";
+			Sleep(1500);	
 			break;
 		}
 	}
 	case 8: {
 		ifstream t1("8.txt");
-		t1.seekg(0, ios::end); // beg = 시작점, cur = 중간 지점, end =끝지점
-		if (t1.tellg() > 4) { // tellg() 파일 크기
-			cout << " 이미 내용 입력되어 있습니다. 새로운 내용을 입력하고 싶으면 스페이스바를 눌러주세요. 아니라면 스페이스바를 제외한 키를 눌러주세요." << endl;
+		t1.seekg(0, ios::end); 
+		if (t1.tellg() > 4) { 
+			cout << "이미 내용 입력되어 있습니다. \n새로운 내용 입력 : 'space' \t\t\t취소 : 아무 키" << endl;
 			int a = _getch();
 			if (a == 32) {
-				cout << "내용을 입력해 주세요 : ";
-				cin.clear();           //getline 버퍼 초기화(전체 버퍼 초기화)
-				getline(cin, Note.work);   // 공백 포함 문자열 쓰기
+				cout << "내용을 입력해 주세요 >> ";
+				cin.clear();        
+				getline(cin, Note.work);  
 				Note.b = 0;
 				outF(Note, 7);
 				t1.close();
+				cout << "일정 내용이 수정되었습니다!!";
+				Sleep(1500);
 				break;
 			}
 		}
 		else {
-			cout << "내용을 입력해 주세요 : ";
-			cin.clear();           //getline 버퍼 초기화(전체 버퍼 초기화)
-			getline(cin, Note.work);   // 공백 포함 문자열 쓰기
+			cout << "내용을 입력해 주세요 >> ";
+			cin.clear();          
+			getline(cin, Note.work);  
 			Note.b = 0;
 			outF(Note, 7);
-			t1.close();		//파일 닫기
+			t1.close();		
+			cout << "일정이 정상적으로 생성 되었습니다!!";
+			Sleep(1500);	
 			break;
 		}
 	}
 	case 9: {
 		ifstream t1("9.txt");
-		t1.seekg(0, ios::end); // beg = 시작점, cur = 중간 지점, end =끝지점
-		if (t1.tellg() > 4) { // tellg() 파일 크기
-			cout << " 이미 내용 입력되어 있습니다. 새로운 내용을 입력하고 싶으면 스페이스바를 눌러주세요. 아니라면 스페이스바를 제외한 키를 눌러주세요." << endl;
+		t1.seekg(0, ios::end);
+		if (t1.tellg() > 4) { 
+			cout << "이미 내용 입력되어 있습니다. \n새로운 내용 입력 : 'space' \t\t\t취소 : 아무 키" << endl;
 			int a = _getch();
 			if (a == 32) {
-				cout << "내용을 입력해 주세요 : ";
-				cin.clear();           //getline 버퍼 초기화(전체 버퍼 초기화)
-				getline(cin, Note.work);   // 공백 포함 문자열 쓰기
+				cout << "내용을 입력해 주세요 >> ";
+				cin.clear();           
+				getline(cin, Note.work);
 				Note.b = 0;
 				outF(Note, 8);
 				t1.close();
+				cout << "일정 내용이 수정되었습니다!!";
+				Sleep(1500);
 				break;
 			}
 		}
 		else {
-			cout << "내용을 입력해 주세요 : ";
-			cin.clear();           //getline 버퍼 초기화(전체 버퍼 초기화)
-			getline(cin, Note.work);   // 공백 포함 문자열 쓰기
+			cout << "내용을 입력해 주세요 >> ";
+			cin.clear();          
+			getline(cin, Note.work);
 			Note.b = 0;
 			outF(Note, 8);
-			t1.close();		//파일 닫기
+			t1.close();
+			cout << "일정이 정상적으로 생성 되었습니다!!";
+			Sleep(1500);
 			break;
 		}
 	}
 	case 10: {
 		ifstream t1("10.txt");
-		t1.seekg(0, ios::end); // beg = 시작점, cur = 중간 지점, end =끝지점
-		if (t1.tellg() > 4) { // tellg() 파일 크기
-			cout << " 이미 내용 입력되어 있습니다. 새로운 내용을 입력하고 싶으면 스페이스바를 눌러주세요. 아니라면 스페이스바를 제외한 키를 눌러주세요." << endl;
+		t1.seekg(0, ios::end);
+		if (t1.tellg() > 4) {
+			cout << "이미 내용 입력되어 있습니다. \n새로운 내용 입력 : 'space' \t\t\t취소 : 아무 키" << endl;
 			int a = _getch();
 			if (a == 32) {
-				cout << "내용을 입력해 주세요 : ";
-				cin.clear();           //getline 버퍼 초기화(전체 버퍼 초기화)
-				getline(cin, Note.work);   // 공백 포함 문자열 쓰기
+				cout << "내용을 입력해 주세요 >> ";
+				cin.clear();          
+				getline(cin, Note.work);
 				Note.b = 0;
 				outF(Note, 9);
 				t1.close();
+				cout << "일정 내용이 수정되었습니다!!";
+				Sleep(1500);
 				break;
 			}
 		}
 		else {
-			cout << "내용을 입력해 주세요 : ";
-			cin.clear();           //getline 버퍼 초기화(전체 버퍼 초기화)
-			getline(cin, Note.work);   // 공백 포함 문자열 쓰기
+			cout << "내용을 입력해 주세요 >> ";
+			cin.clear();
+			getline(cin, Note.work);
 			Note.b = 0;
 			outF(Note, 9);
-			t1.close();		//파일 닫기
+			t1.close();
+			cout << "일정이 정상적으로 생성 되었습니다!!";
+			Sleep(1500);
 			break;
 		}
 	}
@@ -321,9 +356,7 @@ void listdelete() {
 	ifstream txt9("9.txt");
 	ifstream txt10("10.txt");
 
-	cout << endl;
-	cout << "삭제하고 싶은 일정의 번호를 입력하세요 : ";
-	cout << endl;
+	cout << "\n\n삭제하고 싶은 일정의 번호를 입력하세요 >> ";
 
 	cin >> delnum;		// 삭제할 일정 번호 입력
 
@@ -332,6 +365,7 @@ void listdelete() {
 		txt1.seekg(0, ios::end);		// 맨 뒷부분 0번째 자리부터 찾기		
 		if (txt1.fail() || (txt1.tellg() < 4)) {		// 1.txt가 없거나 파일 내용이 비어 있다면
 			cout << "해당 일정은 없습니다.";
+			Sleep(1500);		// 1500ms(1.5초) 정지
 			break;
 		}
 		else {
@@ -340,6 +374,8 @@ void listdelete() {
 				cin.clear();			  // getline 버퍼 초기화(전체 버퍼 초기화)
 			}
 			t.close();	//파일 닫기
+			cout << "해당 일정이 정상적으로 삭제 되었습니다!";
+			Sleep(1500);		// 1500ms(1.5초) 정지
 			break;
 		}
 	}
@@ -347,6 +383,7 @@ void listdelete() {
 		txt2.seekg(0, ios::end);
 		if (txt2.fail() || (txt2.tellg() < 4)) {
 			cout << "해당 일정은 없습니다.";
+			Sleep(1500);		// 1500ms(1.5초) 정지
 			break;
 		}
 		else {
@@ -355,6 +392,8 @@ void listdelete() {
 				cin.clear();
 			}
 			t.close();
+			cout << "해당 일정이 정상적으로 삭제 되었습니다!";
+			Sleep(1500);
 			break;
 		}
 	}
@@ -362,6 +401,7 @@ void listdelete() {
 		txt3.seekg(0, ios::end);
 		if (txt3.fail() || (txt3.tellg() < 4)) {
 			cout << "해당 일정은 없습니다.";
+			Sleep(1500);		// 1500ms(1.5초) 정지
 			break;
 		}
 		else {
@@ -370,6 +410,8 @@ void listdelete() {
 				cin.clear();
 			}
 			t.close();
+			cout << "해당 일정이 정상적으로 삭제 되었습니다!";
+			Sleep(1500);
 			break;
 		}
 	}
@@ -377,6 +419,7 @@ void listdelete() {
 		txt4.seekg(0, ios::end);
 		if (txt4.fail() || (txt4.tellg() < 4)) {
 			cout << "해당 일정은 없습니다.";
+			Sleep(1500);		// 1500ms(1.5초) 정지
 			break;
 		}
 		else {
@@ -385,6 +428,8 @@ void listdelete() {
 				cin.clear();
 			}
 			t.close();
+			cout << "해당 일정이 정상적으로 삭제 되었습니다!";
+			Sleep(1500);
 			break;
 		}
 	}
@@ -392,6 +437,7 @@ void listdelete() {
 		txt5.seekg(0, ios::end);
 		if (txt5.fail() || (txt5.tellg() < 4)) {
 			cout << "해당 일정은 없습니다.";
+			Sleep(1500);		// 1500ms(1.5초) 정지
 			break;
 		}
 		else {
@@ -400,6 +446,8 @@ void listdelete() {
 				cin.clear();
 			}
 			t.close();
+			cout << "해당 일정이 정상적으로 삭제 되었습니다!";
+			Sleep(1500);
 			break;
 		}
 	}
@@ -407,6 +455,7 @@ void listdelete() {
 		txt6.seekg(0, ios::end);
 		if (txt6.fail() || (txt6.tellg() < 4)) {
 			cout << "해당 일정은 없습니다.";
+			Sleep(1500);		// 1500ms(1.5초) 정지
 			break;
 		}
 		else {
@@ -415,6 +464,8 @@ void listdelete() {
 				cin.clear();
 			}
 			t.close();
+			cout << "해당 일정이 정상적으로 삭제 되었습니다!";
+			Sleep(1500);
 			break;
 		}
 	}
@@ -422,6 +473,7 @@ void listdelete() {
 		txt7.seekg(0, ios::end);
 		if (txt7.fail() || (txt7.tellg() < 4)) {
 			cout << "해당 일정은 없습니다.";
+			Sleep(1500);		// 1500ms(1.5초) 정지
 			break;
 		}
 		else {
@@ -430,6 +482,8 @@ void listdelete() {
 				cin.clear();
 			}
 			t.close();
+			cout << "해당 일정이 정상적으로 삭제 되었습니다!";
+			Sleep(1500);
 			break;
 		}
 	}
@@ -437,6 +491,7 @@ void listdelete() {
 		txt8.seekg(0, ios::end);
 		if (txt8.fail() || (txt8.tellg() < 4)) {
 			cout << "해당 일정은 없습니다.";
+			Sleep(1500);		// 1500ms(1.5초) 정지
 			break;
 		}
 		else {
@@ -445,6 +500,8 @@ void listdelete() {
 				cin.clear();
 			}
 			t.close();
+			cout << "해당 일정이 정상적으로 삭제 되었습니다!";
+			Sleep(1500);
 			break;
 		}
 	}
@@ -452,6 +509,7 @@ void listdelete() {
 		txt9.seekg(0, ios::end);
 		if (txt9.fail() || (txt9.tellg() < 4)) {
 			cout << "해당 일정은 없습니다.";
+			Sleep(1500);		// 1500ms(1.5초) 정지
 			break;
 		}
 		else {
@@ -460,6 +518,8 @@ void listdelete() {
 				cin.clear();
 			}
 			t.close();
+			cout << "해당 일정이 정상적으로 삭제 되었습니다!";
+			Sleep(1500);
 			break;
 		}
 	}
@@ -467,6 +527,7 @@ void listdelete() {
 		txt10.seekg(0, ios::end);
 		if (txt10.fail() || (txt10.tellg() < 4)) {
 			cout << "해당 일정은 없습니다.";
+			Sleep(1500);		// 1500ms(1.5초) 정지
 			break;
 		}
 		else {
@@ -475,6 +536,8 @@ void listdelete() {
 				cin.clear();
 			}
 			t.close();
+			cout << "해당 일정이 정상적으로 삭제 되었습니다!";
+			Sleep(1500);
 			break;
 		}
 	}
@@ -538,11 +601,12 @@ void calendar() {
 
 /*메뉴얼 UI*/
 void Manual() {
-	system("title 메뉴얼");
-	system("cls");
-	system(" mode con lines=70 cols=100");
+	system("title 메뉴얼");		// 콘솔 창 제목 수정
+	system("cls");		// 화면 클리어
+	system(" mode con lines=70 cols=100");		// 콘솔 70 * 100
 	//cout << "□■■■□■■■■■□□■■■■■□□■■■■■○○■■■■■□□■■■■■□□■■■■■□■■■□" << endl;
-	int NUM2 = 0;
+	int manualnum = 0;
+
 	for (int i = 0; i < 88; i += 2)
 	{
 		gotoxy(6 + i, 1);
@@ -595,7 +659,7 @@ void Manual() {
 	cout << "프로그램 종료하는 명령어";
 
 	gotoxy(0, 64);
-	NUM2 = _getch();
+	manualnum = _getch();
 }
 
 /*일정 값 가져오기*/
@@ -807,40 +871,36 @@ void Progress() {
 }
 
 /*일정 완료*/
-void ScheduleComplete() {
-	ToDo sch;
-	int i;
-	cout << "완료하실 일정 번호를 입력해주세요.>>";
+void listcomplete() {
+	ToDo sch;		// 일정을 읽어올 ToDo 클래스 타입 객체 생성
+	int i;		// 완료 번호
+	cout << "완료하실 일정 번호를 입력해주세요 >> ";
 	cin >> i;
-	i = --i;
-	inF(&sch, i);
+	i = --i;		// inF switch~case문 이용을 위해 전위감소연산자
+	inF(&sch, i);		// 일정 txt 파일 내용 읽어오기
 
-	if (sch.b == 204) {
-		cout << "일정이 없습니다." << endl;
+	if (sch.b == 204) {		// 완료 여부 값이 공백이면
+		cout << "일정이 없습니다!" << endl;
+		Sleep(1500);		// 1500ms(1.5초) 정지
 	}
-	else if (sch.b == false) {
-		sch.b = true;
-		cout << "완료 되었습니다." << endl;
-		outF(sch, i);
+	else if (sch.b == false) {		// 완료 여부 0(미완료)이면
+		sch.b = true;		// 완료 여부 true(1)
+		cout << "완료 되었습니다!!" << endl;
+		Sleep(1500);		
+		outF(sch, i);		// 수정된 txt 파일 내용 덮어쓰기
 	}
-	else if (sch.b == true) {
-		sch.b = false;
-		cout << "취소 되었습니다." << endl;
+	else if (sch.b == true) {		// 완료 여부 1(완료)이면
+		sch.b = false;		// 완료 여부 false(0)
+		cout << "취소 되었습니다!!" << endl;
+		Sleep(1500);
 		outF(sch, i);
 	}
 }
 
-void inputlist() {
-	ToDo abc;
-	ToDo a[10];
-	for (int i = 0; i < 10; i++) {
-		inF(&abc, i);
-		a[i].work = abc.work;
-	}
-}
+int submove();		// 서브 메뉴 화면 이동 선언
 
 /*메인 화면*/
-void mainmemu() { // 메인화면 출력
+void mainmemu() {
 	system("cls");//화면 클리어 
 	system("mode con cols=100 lines=70"); //콘솔 100*70
 
@@ -884,47 +944,47 @@ void mainmemu() { // 메인화면 출력
 
 /*서브 화면*/
 void submemu() {
-	system("cls");
-	system("mode con: cols=100 lines=70");
-	ToDo a[10];
-	time_t timer = time(NULL);
-	struct tm* t = localtime(&timer);
+	system("cls");		// 화면 클리어
+	system("mode con: cols=100 lines=70");		// 콘솔 100*70
+
+	/* 일정 */
+	ToDo a[10];		// ToDo 타입의 객체 배열 선언
+	for (int i = 0; i < 10; i++) inF(&a[i], i);
+
+	/*사용자 시스템 날짜*/
+	time_t timer = time(NULL);		// timer에 유닉스 타임이후 지금까지의 초단위 시간을 저장
+	struct tm* t = localtime(&timer);		//  현재 시간을 tm 구조체 포인터 t에 저장
 	struct tm {
-		int tm_mday;
-		int tm_mon;
-		int tm_year;
+		int tm_mday;	// 1일부터 시작 [0, 31]
+		int tm_mon;		// 1월부터 시작 [0, 11]
+		int tm_year;	// 1970년 부터 시작해서 +1900을 해야 현재년도 출력
 	};
+	cout << "\t\t\t\t\t" << to_string(t->tm_year - 100 ) << "." << to_string(t->tm_mon + 1) << "." << to_string(t->tm_mday) << "  오늘 할 일!" << endl;
 
-	for (int i = 0; i < 10; i++) {
-		inF(&a[i], i);
-	}
-
-	cout << "\t\t\t\t\t" << to_string(t->tm_year - 100) << "." << to_string(t->tm_mon + 1) << "." << to_string(t->tm_mday) << "  오늘 할 일!" << endl;
-
-	/*성취도*/
+	/*일정 성취도*/
 	Progress();
 	cout << endl << endl;
 
-	/*리스트*/
+	/*일정 목록*/
 	for (int i = 0; i < 10; i++) {
 		cout << "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■" << endl;
 		cout << setw(6) << "■" << endl;
-		if (a[i].b != 204) {
-			if (a[i].b == true) {
-				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 2);
+		if (a[i].b != 204) {			// 일정 완료가 공백이 아니고
+			if (a[i].b == true) {		// 완료 상태이면
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 2);		// 콘솔 글자 색 변경
 				cout << " " << a[i].level << setw(4);
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-				cout << "■" ;
+				cout << "■";
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 2);
 				cout << a[i].work << endl;
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
 			}
-			else if (a[i].b == false) {
+			else if (a[i].b == false) {		// 미완료 상태이면
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
 				cout << " " << a[i].level << setw(4) << "■" << a[i].work << endl;
 			}
 		}
-		else
+		else		// 공백이면 == 일정이 없다면
 			cout << setw(6) << "■" << endl;
 		cout << setw(6) << "■" << endl;
 	}
@@ -936,9 +996,6 @@ void submemu() {
 	cout << "명령어 >>" << endl;
 }
 
-/*화면 전환 */
-int submove();
-
 /*화면 전환2*/
 void move() {
 	int num1 = 0; //화면이동 변수
@@ -946,41 +1003,46 @@ void move() {
 	num1 = _getch(); // = system("pause"); 키 입력 받으면 이동
 	switch (num1) {
 	case 67: calendar(); break;		// 명령어 C 아스키 코드
-	case 68: do { submove(); } while (submove() != 0); break;		// 명령어 D 아스키 코드
+	case 68: while (submove() != 0); { submove(); } break;		// 명령어 D 아스키 코드, 메인 메뉴 이동 전까지 submove에서 무한 반복
 	case 99: calendar(); break;		// 명령어 c 아스키 코드
-	case 100: do { submove(); } while (submove() != 0); break;		// 명령어 d 아스키 코드
+	case 100: while (submove() != 0); { submove(); } break;		// 명령어 d 아스키 코드
 	}
 }
 
 /*화면 전환*/
 int submove() {
-	int num2 = NULL; //화면이동 변수
+	int num2 = 0; //화면이동 변수
+	system("title 일일 목록");		// 콘솔 창 제목 수정
 	submemu();
-	num2 = _getch();	//화면이동 입력
-	if (num2 == 77 || num2 == 109) return 0;		// 메인메뉴로 이동
+	
+	num2 = _getch();	// 화면 이동 값 입력
+
 	switch (num2) {
 	case 65: listadd(); break;		// 명령어 A 아스키 코드
-	case 70: ScheduleComplete(); break;		// 명령어 F 아스키 코드
+	case 67: Manual();  break;		// 명령어 C 아스키 코드
 	case 68: listdelete(); break;		// 명령어 D 아스키 코드
-	case 67: Manual(); break;		// 명령어 M 아스키 코드
 	case 69: exit(0); break;		// 명령어 E 아스키 코드
+	case 70: listcomplete(); break;		// 명령어 F 아스키 코드
+	case 77: return 0; break;		// 명령어 M 아스키 코드
+
 	case 97: listadd(); break;		// 명령어 a 아스키 코드
-	case 102: ScheduleComplete(); break;		// 명령어 f 아스키 코드
+	case 99: Manual(); break;		// 명령어 c 아스키 코드
 	case 100: listdelete(); break;		// 명령어 d 아스키 코드
-	case 99: Manual(); break;		// 명령어 m 아스키 코드
 	case 101: exit(0); break;		// 명령어 e 아스키 코드
-	default: cout << "잘못된 명령어 입니다. 다시 입력해주세요"; break;
+	case 102: listcomplete(); break;		// 명령어 f 아스키 코드
+	case 109: return 0; break;		// 명령어 m 아스키 코드
+	default: cout << "잘못된 명령어입니다. 아무 키나 입력하세요 >> "; num2 = _getch(); break;
+
 	}
 }
 
 
 
-
 /*메인 함수*/
 int main() {
-	system("title 일일 목록");
 	while (true)
 	{
+		system("title TO DO LIST");		// 콘솔 창 제목 수정
 		move();
 	}
 
