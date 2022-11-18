@@ -664,82 +664,74 @@ void Manual() {
 
 /*일정 값 가져오기*/
 void inF(ToDo* a, int i) {
+	char t;
 	switch (i) {
 	case 0: {
-		ifstream fin;
-		fin.open("1.txt");
-		fin >> a->b >> a->level;
+		ifstream fin("1.txt");
+		fin >> a->b >> t >> a->level >> t;
 		getline(fin, a->work);
 		fin.close();
 		break;
 	}
 	case 1: {
-		ifstream fin;
-		fin.open("2.txt");
-		fin >> a->b >> a->level;
+		ifstream fin("2.txt");
+		fin >> a->b >> t >> a->level >> t;
 		getline(fin, a->work);
 		fin.close();
 		break;
 	}
 	case 2: {
-		ifstream fin;
-		fin.open("3.txt");
-		fin >> a->b >> a->level;
+		ifstream fin("3.txt");
+		fin >> a->b >> t >> a->level >> t;
 		getline(fin, a->work);
 		fin.close();
 		break;
 	}
 	case 3: {
-		ifstream fin;
-		fin.open("4.txt");
-		fin >> a->b >> a->level;
+		ifstream fin("4.txt");
+		fin >> a->b >> t >> a->level >> t;
 		getline(fin, a->work);
+		fin.close();
 		break;
 	}
 	case 4: {
-		ifstream fin;
-		fin.open("5.txt");
-		fin >> a->b >> a->level;
+		ifstream fin("5.txt");
+		fin >> a->b >> t >> a->level >> t;
 		getline(fin, a->work);
 		fin.close();
 		break;
 	}
 	case 5: {
-		ifstream fin;
-		fin.open("6.txt");
-		fin >> a->b >> a->level;
+		ifstream fin("6.txt");
+		fin >> a->b >> t >> a->level >> t;
 		getline(fin, a->work);
 		fin.close();
 		break;
 	}
 	case 6: {
-		ifstream fin;
-		fin.open("7.txt");
-		fin >> a->b >> a->level;
+		ifstream fin("7.txt");
+		fin >> a->b >> t >> a->level >> t;
 		getline(fin, a->work);
 		fin.close();
 		break;
 	}
 	case 7: {
-		ifstream fin;
-		fin.open("8.txt");
-		fin >> a->b >> a->level;
+		ifstream fin("8.txt");
+		fin >> a->b >> t >> a->level >> t;
 		getline(fin, a->work);
 		fin.close();
 		break;
 	}
 	case 8: {
-		ifstream fin;
-		fin.open("9.txt");
-		fin >> a->b >> a->level;
+		ifstream fin("9.txt");
+		fin >> a->b >> t >> a->level >> t;
 		getline(fin, a->work);
 		fin.close();
 		break;
 	}
 	case 9: {
-		ifstream fin;
-		fin.open("10.txt");
-		fin >> a->b >> a->level;
+		ifstream fin("10.txt");
+		fin >> a->b >> t >> a->level >> t;
 		getline(fin, a->work);
 		fin.close();
 		break;
@@ -756,70 +748,70 @@ void outF(ToDo a, int i) {
 	case 0: {
 		ofstream fout("1.txt");
 		cin.clear();
-		fout << a.b << " " << a.level << " " << a.work;
+		fout << a.b << "/" << a.level << "/" << a.work;
 		fout.close();
 		break;
 	}
 	case 1: {
 		ofstream fout("2.txt");
 		cin.clear();
-		fout << a.b << " " << a.level << " " << a.work;
+		fout << a.b << "/" << a.level << "/" << a.work;
 		fout.close();
 		break;
 	}
 	case 2: {
 		ofstream fout("3.txt");
 		cin.clear();
-		fout << a.b << " " << a.level << " " << a.work;
+		fout << a.b << "/" << a.level << "/" << a.work;
 		fout.close();
 		break;
 	}
 	case 3: {
 		ofstream fout("4.txt");
 		cin.clear();
-		fout << a.b << " " << a.level << " " << a.work;
+		fout << a.b << "/" << a.level << "/" << a.work;
 		fout.close();
 		break;
 	}
 	case 4: {
 		ofstream fout("5.txt");
 		cin.clear();
-		fout << a.b << " " << a.level << " " << a.work;
+		fout << a.b << "/" << a.level << "/" << a.work;
 		fout.close();
 		break;
 	}
 	case 5: {
 		ofstream fout("6.txt");
 		cin.clear();
-		fout << a.b << " " << a.level << " " << a.work;
+		fout << a.b << "/" << a.level << "/" << a.work;
 		fout.close();
 		break;
 	}
 	case 6: {
 		ofstream fout("7.txt");
 		cin.clear();
-		fout << a.b << " " << a.level << " " << a.work;
+		fout << a.b << "/" << a.level << "/" << a.work;
 		fout.close();
 		break;
 	}
 	case 7: {
 		ofstream fout("8.txt");
 		cin.clear();
-		fout << a.b << " " << a.level << " " << a.work;
+		fout << a.b << "/" << a.level << "/" << a.work;
 		fout.close();
 		break;
 	}
 	case 8: {
 		ofstream fout("9.txt");
 		cin.clear();
-		fout << a.b << " " << a.level << " " << a.work;
+		fout << a.b << "/" << a.level << "/" << a.work;
 		fout.close();
 		break;
 	}
 	case 9: {
 		ofstream fout("10.txt");
 		cin.clear();
-		fout << a.b << " " << a.level << " " << a.work;
+		fout << a.b << "/" << a.level << "/" << a.work;
 		fout.close();
 		break;
 	}
