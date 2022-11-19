@@ -32,313 +32,319 @@ void listadd() {
 	cin >> Note.level;		// 일정 번호 입력
 	cin.ignore(); //위의 cin 버퍼 지우기 안쓰면 getline()이 돌아가지 않음.
 
-	switch (Note.level) {
-	case 1: {
-		ifstream t1("1.txt");
-		t1.seekg(0, ios::end); // beg = 시작점, cur = 중간 지점, end =끝지점
-		if (t1.tellg() > 4) { // tellg() 파일 크기
-			cout << "이미 내용 입력되어 있습니다. \n새로운 내용 입력 : 'space' \t\t\t취소 : 아무 키" << endl;
-			int a = _getch();
-			if (a == 32) {
+	if (cin.fail()) { // 정상적인 입력이 진행되지 않으면
+		cout << "숫자를 입력해 주세요!";
+		cin.clear(); //에러 상태를 취소
+		cin.ignore(256, '\n'); //입력버퍼에 남아있는 잘못된 값들을 지움
+		Sleep(1500);
+	}
+	else {
+		switch (Note.level) {
+		case 1: {
+			ifstream t1("1.txt");
+			t1.seekg(0, ios::end); // beg = 시작점, cur = 중간 지점, end =끝지점
+			if (t1.tellg() > 4) { // tellg() 파일 크기
+				cout << "이미 내용 입력되어 있습니다. \n새로운 내용 입력 : 'space' \t\t\t취소 : 아무 키" << endl;
+				int a = _getch();
+				if (a == 32) {
+					cout << "내용을 입력해 주세요 >> ";
+					cin.clear();           //getline 버퍼 초기화(전체 버퍼 초기화)
+					getline(cin, Note.work);   // 공백 포함 문자열 쓰기
+					Note.b = 0;
+					outF(Note, 0);
+					t1.close();
+					cout << "일정 내용이 수정되었습니다!!";
+					Sleep(1500);		// 1500ms(1.5초) 정지
+				}
+				break;
+			}
+			else {
 				cout << "내용을 입력해 주세요 >> ";
 				cin.clear();           //getline 버퍼 초기화(전체 버퍼 초기화)
 				getline(cin, Note.work);   // 공백 포함 문자열 쓰기
 				Note.b = 0;
 				outF(Note, 0);
-				t1.close();
-				cout << "일정 내용이 수정되었습니다!!";
+				t1.close();	//파일 닫기
+				cout << "일정이 정상적으로 생성 되었습니다!!";
 				Sleep(1500);		// 1500ms(1.5초) 정지
+				break;
 			}
-			break;
 		}
-		else {
-			cout << "내용을 입력해 주세요 >> ";
-			cin.clear();           //getline 버퍼 초기화(전체 버퍼 초기화)
-			getline(cin, Note.work);   // 공백 포함 문자열 쓰기
-			Note.b = 0;
-			outF(Note, 0);
-			t1.close();	//파일 닫기
-			cout << "일정이 정상적으로 생성 되었습니다!!";
-			Sleep(1500);		// 1500ms(1.5초) 정지
-			break;
-		}
-	}
-	case 2: {
-		ifstream t1("2.txt");
-		t1.seekg(0, ios::end); 
-		if (t1.tellg() > 4) { 
-			cout << "이미 내용 입력되어 있습니다. \n새로운 내용 입력 : 'space' \t\t\t취소 : 아무 키" << endl;
-			int a = _getch();
-			if (a == 32) {
+		case 2: {
+			ifstream t1("2.txt");
+			t1.seekg(0, ios::end);
+			if (t1.tellg() > 4) {
+				cout << "이미 내용 입력되어 있습니다. \n새로운 내용 입력 : 'space' \t\t\t취소 : 아무 키" << endl;
+				int a = _getch();
+				if (a == 32) {
+					cout << "내용을 입력해 주세요 >> ";
+					cin.clear();
+					getline(cin, Note.work);
+					Note.b = 0;
+					outF(Note, 1);
+					t1.close();
+					cout << "일정 내용이 수정되었습니다!!";
+					Sleep(1500);
+				}
+				break;
+			}
+			else {
 				cout << "내용을 입력해 주세요 >> ";
-				cin.clear();          
-				getline(cin, Note.work);   
+				cin.clear();
+				getline(cin, Note.work);
 				Note.b = 0;
 				outF(Note, 1);
 				t1.close();
-				cout << "일정 내용이 수정되었습니다!!";
+				cout << "일정이 정상적으로 생성 되었습니다!!";
 				Sleep(1500);
+				break;
 			}
-			break;
 		}
-		else {
-			cout << "내용을 입력해 주세요 >> ";
-			cin.clear();           
-			getline(cin, Note.work);  
-			Note.b = 0;
-			outF(Note, 1);
-			t1.close();		
-			cout << "일정이 정상적으로 생성 되었습니다!!";
-			Sleep(1500);		
-			break;
-		}
-	}
-	case 3: {
-		ifstream t1("3.txt");
-		t1.seekg(0, ios::end); 
-		if (t1.tellg() > 4) { 
-			cout << "이미 내용 입력되어 있습니다. \n새로운 내용 입력 : 'space' \t\t\t취소 : 아무 키" << endl;
-			int a = _getch();
-			if (a == 32) {
+		case 3: {
+			ifstream t1("3.txt");
+			t1.seekg(0, ios::end);
+			if (t1.tellg() > 4) {
+				cout << "이미 내용 입력되어 있습니다. \n새로운 내용 입력 : 'space' \t\t\t취소 : 아무 키" << endl;
+				int a = _getch();
+				if (a == 32) {
+					cout << "내용을 입력해 주세요 >> ";
+					cin.clear();
+					getline(cin, Note.work);
+					Note.b = 0;
+					outF(Note, 2);
+					t1.close();
+					cout << "일정 내용이 수정되었습니다!!";
+					Sleep(1500);
+				}
+				break;
+			}
+			else {
 				cout << "내용을 입력해 주세요 >> ";
-				cin.clear();          
-				getline(cin, Note.work);  
+				cin.clear();
+				getline(cin, Note.work);
 				Note.b = 0;
 				outF(Note, 2);
 				t1.close();
-				cout << "일정 내용이 수정되었습니다!!";
+				cout << "일정이 정상적으로 생성 되었습니다!!";
 				Sleep(1500);
+				break;
 			}
-			break;
 		}
-		else {
-			cout << "내용을 입력해 주세요 >> ";
-			cin.clear();           
-			getline(cin, Note.work);  
-			Note.b = 0;
-			outF(Note, 2);
-			t1.close();		
-			cout << "일정이 정상적으로 생성 되었습니다!!";
-			Sleep(1500);		
-			break;
-		}
-	}
-	case 4: {
-		ifstream t1("4.txt");
-		t1.seekg(0, ios::end); 
-		if (t1.tellg() > 4) { 
-			cout << "이미 내용 입력되어 있습니다. \n새로운 내용 입력 : 'space' \t\t\t취소 : 아무 키" << endl;
-			int a = _getch();
-			if (a == 32) {
+		case 4: {
+			ifstream t1("4.txt");
+			t1.seekg(0, ios::end);
+			if (t1.tellg() > 4) {
+				cout << "이미 내용 입력되어 있습니다. \n새로운 내용 입력 : 'space' \t\t\t취소 : 아무 키" << endl;
+				int a = _getch();
+				if (a == 32) {
+					cout << "내용을 입력해 주세요 >> ";
+					cin.clear();
+					getline(cin, Note.work);
+					Note.b = 0;
+					outF(Note, 3);
+					t1.close();
+					cout << "일정 내용이 수정되었습니다!!";
+					Sleep(1500);
+				}
+				break;
+			}
+			else {
 				cout << "내용을 입력해 주세요 >> ";
-				cin.clear();          
-				getline(cin, Note.work);  
+				cin.clear();
+				getline(cin, Note.work);
 				Note.b = 0;
 				outF(Note, 3);
 				t1.close();
-				cout << "일정 내용이 수정되었습니다!!";
+				cout << "일정이 정상적으로 생성 되었습니다!!";
 				Sleep(1500);
+				break;
 			}
-			break;
 		}
-		else {
-			cout << "내용을 입력해 주세요 >> ";
-			cin.clear();        
-			getline(cin, Note.work);  
-			Note.b = 0;
-			outF(Note, 3);
-			t1.close();		
-			cout << "일정이 정상적으로 생성 되었습니다!!";
-			Sleep(1500);		
-			break;
-		}
-	}
-	case 5: {
-		ifstream t1("5.txt");
-		t1.seekg(0, ios::end); 
-		if (t1.tellg() > 4) { 
-			cout << "이미 내용 입력되어 있습니다. \n새로운 내용 입력 : 'space' \t\t\t취소 : 아무 키" << endl;
-			int a = _getch();
-			if (a == 32) {
+		case 5: {
+			ifstream t1("5.txt");
+			t1.seekg(0, ios::end);
+			if (t1.tellg() > 4) {
+				cout << "이미 내용 입력되어 있습니다. \n새로운 내용 입력 : 'space' \t\t\t취소 : 아무 키" << endl;
+				int a = _getch();
+				if (a == 32) {
+					cout << "내용을 입력해 주세요 >> ";
+					cin.clear();
+					getline(cin, Note.work);
+					Note.b = 0;
+					outF(Note, 4);
+					t1.close();
+					cout << "일정 내용이 수정되었습니다!!";
+					Sleep(1500);
+				}
+				break;
+			}
+			else {
 				cout << "내용을 입력해 주세요 >> ";
-				cin.clear();        
-				getline(cin, Note.work);  
+				cin.clear();
+				getline(cin, Note.work);
 				Note.b = 0;
 				outF(Note, 4);
 				t1.close();
-				cout << "일정 내용이 수정되었습니다!!";
+				cout << "일정이 정상적으로 생성 되었습니다!!";
 				Sleep(1500);
+				break;
 			}
-			break;
 		}
-		else {
-			cout << "내용을 입력해 주세요 >> ";
-			cin.clear();          
-			getline(cin, Note.work);  
-			Note.b = 0;
-			outF(Note, 4);
-			t1.close();		
-			cout << "일정이 정상적으로 생성 되었습니다!!";
-			Sleep(1500);	
-			break;
-		}
-	}
-	case 6: {
-		ifstream t1("6.txt");
-		t1.seekg(0, ios::end); 
-		if (t1.tellg() > 4) { 
-			cout << "이미 내용 입력되어 있습니다. \n새로운 내용 입력 : 'space' \t\t\t취소 : 아무 키" << endl;
-			int a = _getch();
-			if (a == 32) {
+		case 6: {
+			ifstream t1("6.txt");
+			t1.seekg(0, ios::end);
+			if (t1.tellg() > 4) {
+				cout << "이미 내용 입력되어 있습니다. \n새로운 내용 입력 : 'space' \t\t\t취소 : 아무 키" << endl;
+				int a = _getch();
+				if (a == 32) {
+					cout << "내용을 입력해 주세요 >> ";
+					cin.clear();
+					getline(cin, Note.work);
+					Note.b = 0;
+					outF(Note, 5);
+					t1.close();
+					cout << "일정 내용이 수정되었습니다!!";
+					Sleep(1500);
+				}
+				break;
+			}
+			else {
 				cout << "내용을 입력해 주세요 >> ";
-				cin.clear();          
-				getline(cin, Note.work);   
+				cin.clear();
+				getline(cin, Note.work);
 				Note.b = 0;
 				outF(Note, 5);
 				t1.close();
-				cout << "일정 내용이 수정되었습니다!!";
+				cout << "일정이 정상적으로 생성 되었습니다!!";
 				Sleep(1500);
+				break;
 			}
-			break;
 		}
-		else {
-			cout << "내용을 입력해 주세요 >> ";
-			cin.clear();         
-			getline(cin, Note.work);   
-			Note.b = 0;
-			outF(Note, 5);
-			t1.close();		
-			cout << "일정이 정상적으로 생성 되었습니다!!";
-			Sleep(1500);		
-			break;
-		}
-	}
-	case 7: {
-		ifstream t1("7.txt");
-		t1.seekg(0, ios::end); 
-		if (t1.tellg() > 4) {
-			cout << "이미 내용 입력되어 있습니다. \n새로운 내용 입력 : 'space' \t\t\t취소 : 아무 키" << endl;
-			int a = _getch();
-			if (a == 32) {
+		case 7: {
+			ifstream t1("7.txt");
+			t1.seekg(0, ios::end);
+			if (t1.tellg() > 4) {
+				cout << "이미 내용 입력되어 있습니다. \n새로운 내용 입력 : 'space' \t\t\t취소 : 아무 키" << endl;
+				int a = _getch();
+				if (a == 32) {
+					cout << "내용을 입력해 주세요 >> ";
+					cin.clear();
+					getline(cin, Note.work);
+					Note.b = 0;
+					outF(Note, 6);
+					t1.close();
+					cout << "일정 내용이 수정되었습니다!!";
+					Sleep(1500);
+				}
+				break;
+			}
+			else {
 				cout << "내용을 입력해 주세요 >> ";
-				cin.clear();          
-				getline(cin, Note.work); 
+				cin.clear();
+				getline(cin, Note.work);
 				Note.b = 0;
 				outF(Note, 6);
 				t1.close();
-				cout << "일정 내용이 수정되었습니다!!";
+				cout << "일정이 정상적으로 생성 되었습니다!!";
 				Sleep(1500);
+				break;
 			}
-			break;
 		}
-		else {
-			cout << "내용을 입력해 주세요 >> ";
-			cin.clear();         
-			getline(cin, Note.work);  
-			Note.b = 0;
-			outF(Note, 6);
-			t1.close();		
-			cout << "일정이 정상적으로 생성 되었습니다!!";
-			Sleep(1500);	
-			break;
-		}
-	}
-	case 8: {
-		ifstream t1("8.txt");
-		t1.seekg(0, ios::end); 
-		if (t1.tellg() > 4) { 
-			cout << "이미 내용 입력되어 있습니다. \n새로운 내용 입력 : 'space' \t\t\t취소 : 아무 키" << endl;
-			int a = _getch();
-			if (a == 32) {
+		case 8: {
+			ifstream t1("8.txt");
+			t1.seekg(0, ios::end);
+			if (t1.tellg() > 4) {
+				cout << "이미 내용 입력되어 있습니다. \n새로운 내용 입력 : 'space' \t\t\t취소 : 아무 키" << endl;
+				int a = _getch();
+				if (a == 32) {
+					cout << "내용을 입력해 주세요 >> ";
+					cin.clear();
+					getline(cin, Note.work);
+					Note.b = 0;
+					outF(Note, 7);
+					t1.close();
+					cout << "일정 내용이 수정되었습니다!!";
+					Sleep(1500);
+				}
+				break;
+			}
+			else {
 				cout << "내용을 입력해 주세요 >> ";
-				cin.clear();        
-				getline(cin, Note.work);  
+				cin.clear();
+				getline(cin, Note.work);
 				Note.b = 0;
 				outF(Note, 7);
 				t1.close();
-				cout << "일정 내용이 수정되었습니다!!";
+				cout << "일정이 정상적으로 생성 되었습니다!!";
 				Sleep(1500);
+				break;
 			}
-			break;
 		}
-		else {
-			cout << "내용을 입력해 주세요 >> ";
-			cin.clear();          
-			getline(cin, Note.work);  
-			Note.b = 0;
-			outF(Note, 7);
-			t1.close();		
-			cout << "일정이 정상적으로 생성 되었습니다!!";
-			Sleep(1500);	
-			break;
-		}
-	}
-	case 9: {
-		ifstream t1("9.txt");
-		t1.seekg(0, ios::end);
-		if (t1.tellg() > 4) { 
-			cout << "이미 내용 입력되어 있습니다. \n새로운 내용 입력 : 'space' \t\t\t취소 : 아무 키" << endl;
-			int a = _getch();
-			if (a == 32) {
+		case 9: {
+			ifstream t1("9.txt");
+			t1.seekg(0, ios::end);
+			if (t1.tellg() > 4) {
+				cout << "이미 내용 입력되어 있습니다. \n새로운 내용 입력 : 'space' \t\t\t취소 : 아무 키" << endl;
+				int a = _getch();
+				if (a == 32) {
+					cout << "내용을 입력해 주세요 >> ";
+					cin.clear();
+					getline(cin, Note.work);
+					Note.b = 0;
+					outF(Note, 8);
+					t1.close();
+					cout << "일정 내용이 수정되었습니다!!";
+					Sleep(1500);
+				}
+				break;
+			}
+			else {
 				cout << "내용을 입력해 주세요 >> ";
-				cin.clear();           
+				cin.clear();
 				getline(cin, Note.work);
 				Note.b = 0;
 				outF(Note, 8);
 				t1.close();
-				cout << "일정 내용이 수정되었습니다!!";
+				cout << "일정이 정상적으로 생성 되었습니다!!";
 				Sleep(1500);
+				break;
 			}
-			break;
 		}
-		else {
-			cout << "내용을 입력해 주세요 >> ";
-			cin.clear();          
-			getline(cin, Note.work);
-			Note.b = 0;
-			outF(Note, 8);
-			t1.close();
-			cout << "일정이 정상적으로 생성 되었습니다!!";
-			Sleep(1500);
-			break;
-		}
-	}
-	case 10: {
-		ifstream t1("10.txt");
-		t1.seekg(0, ios::end);
-		if (t1.tellg() > 4) {
-			cout << "이미 내용 입력되어 있습니다. \n새로운 내용 입력 : 'space' \t\t\t취소 : 아무 키" << endl;
-			int a = _getch();
-			if (a == 32) {
+		case 10: {
+			ifstream t1("10.txt");
+			t1.seekg(0, ios::end);
+			if (t1.tellg() > 4) {
+				cout << "이미 내용 입력되어 있습니다. \n새로운 내용 입력 : 'space' \t\t\t취소 : 아무 키" << endl;
+				int a = _getch();
+				if (a == 32) {
+					cout << "내용을 입력해 주세요 >> ";
+					cin.clear();
+					getline(cin, Note.work);
+					Note.b = 0;
+					outF(Note, 9);
+					t1.close();
+					cout << "일정 내용이 수정되었습니다!!";
+					Sleep(1500);
+				}
+				break;
+			}
+			else {
 				cout << "내용을 입력해 주세요 >> ";
-				cin.clear();          
+				cin.clear();
 				getline(cin, Note.work);
 				Note.b = 0;
 				outF(Note, 9);
 				t1.close();
-				cout << "일정 내용이 수정되었습니다!!";
+				cout << "일정이 정상적으로 생성 되었습니다!!";
 				Sleep(1500);
+				break;
 			}
-			break;
 		}
-		else {
-			cout << "내용을 입력해 주세요 >> ";
-			cin.clear();
-			getline(cin, Note.work);
-			Note.b = 0;
-			outF(Note, 9);
-			t1.close();
-			cout << "일정이 정상적으로 생성 되었습니다!!";
-			Sleep(1500);
+		default: cout << "생성 가능한 일정의 개수를 초과했습니다. 1~10 사이의 숫자를 입력해주세요.";
 			break;
 		}
 	}
-	default: cout << "생성 가능한 일정의 개수를 초과했습니다. 1~10 사이의 숫자를 입력해주세요.";
-		break;
-	}
-
 }/*일정 추가*/
-
 /*일정 삭제*/
 void listdelete() {
 
