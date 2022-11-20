@@ -28,6 +28,7 @@ void gotoxy(int x, int y) {
 }
 /*일정 추가*/
 void listadd() {
+	int addnum = 0;
 	cout << "생성할 일정의 번호를 입력해 주세요 >> ";
 	cin >> Note.level;		// 일정 번호 입력
 	cin.ignore(); //위의 cin 버퍼 지우기 안쓰면 getline()이 돌아가지 않음.
@@ -36,7 +37,7 @@ void listadd() {
 		cout << "숫자를 입력해 주세요!";
 		cin.clear(); //에러 상태를 취소
 		cin.ignore(256, '\n'); //입력버퍼에 남아있는 잘못된 값들을 지움
-		Sleep(1500);
+		addnum = _getch();		// 오류문구 출력 후 띄워놓기 위해 아무 값 입력
 	}
 	else {
 		switch (Note.level) {
@@ -567,6 +568,7 @@ void listdelete() {
 
 /*캘린더 UI*/
 void calendar() {
+	system("title 달력");		// 콘솔 창 제목 수정
 	system("cls");
 	system("mode con cols=150 lines=50");
 	char a = NULL;
@@ -607,7 +609,7 @@ void calendar() {
 
 /*메뉴얼 UI*/
 void Manual() {
-	system("title 메뉴얼");		// 콘솔 창 제목 수정
+	system("title 매뉴얼");		// 콘솔 창 제목 수정
 	system("cls");		// 화면 클리어
 	system(" mode con lines=70 cols=100");		// 콘솔 70 * 100
 	//cout << "□■■■□■■■■■□□■■■■■□□■■■■■○○■■■■■□□■■■■■□□■■■■■□■■■□" << endl;
@@ -884,7 +886,7 @@ void listcomplete() {
 	else if (sch.b == false) {		// 완료 여부 0(미완료)이면
 		sch.b = true;		// 완료 여부 true(1)
 		cout << "완료 되었습니다!!" << endl;
-		Sleep(1500);		
+		Sleep(1500);
 		outF(sch, i);		// 수정된 txt 파일 내용 덮어쓰기
 	}
 	else if (sch.b == true) {		// 완료 여부 1(완료)이면
@@ -957,7 +959,7 @@ void submenu() {
 		int tm_mon;		// 1월부터 시작 [0, 11]
 		int tm_year;	// 1970년 부터 시작해서 +1900을 해야 현재년도 출력
 	};
-	cout << "\t\t\t\t\t" << to_string(t->tm_year - 100 ) << "." << to_string(t->tm_mon + 1) << "." << to_string(t->tm_mday) << "  오늘 할 일!" << endl;
+	cout << "\t\t\t\t\t" << to_string(t->tm_year - 100) << "." << to_string(t->tm_mon + 1) << "." << to_string(t->tm_mday) << "  오늘 할 일!" << endl;
 
 	/*일정 성취도*/
 	Progress();
@@ -1023,7 +1025,7 @@ int submove() {
 	int num2 = 0; //화면이동 변수
 	system("title 일일 목록");		// 콘솔 창 제목 수정
 	submenu();
-	
+
 	num2 = _getch();	// 화면 이동 값 입력
 
 	switch (num2) {
