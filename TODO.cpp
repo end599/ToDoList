@@ -19,6 +19,7 @@ public:
 ToDo Note;		// 일정을 담당하는 ToDo 클래스 타입의 Note 객체 생성
 
 void outF(ToDo, int);	//일정 추가 사용을 위해 선언
+int submove();		// 서브 메뉴 화면 이동 선언
 
 void gotoxy(int x, int y) {
 	COORD pos;
@@ -28,7 +29,6 @@ void gotoxy(int x, int y) {
 }
 /*일정 추가*/
 void listadd() {
-	int addnum = 0;
 	cout << "생성할 일정의 번호를 입력해 주세요 >> ";
 	cin >> Note.level;		// 일정 번호 입력
 	cin.ignore(); //위의 cin 버퍼 지우기 안쓰면 getline()이 돌아가지 않음.
@@ -37,7 +37,7 @@ void listadd() {
 		cout << "숫자를 입력해 주세요!";
 		cin.clear(); //에러 상태를 취소
 		cin.ignore(256, '\n'); //입력버퍼에 남아있는 잘못된 값들을 지움
-		addnum = _getch();		// 오류문구 출력 후 띄워놓기 위해 아무 값 입력
+		Sleep(1500);
 	}
 	else {
 		switch (Note.level) {
@@ -346,6 +346,7 @@ void listadd() {
 		}
 	}
 }/*일정 추가*/
+
 /*일정 삭제*/
 void listdelete() {
 
@@ -366,6 +367,12 @@ void listdelete() {
 	cout << "\n\n삭제하고 싶은 일정의 번호를 입력하세요 >> ";
 
 	cin >> delnum;		// 삭제할 일정 번호 입력
+
+	if (cin.fail()) { // 정상적인 입력이 진행되지 않으면
+		cout << "숫자를 입력해 주세요!" << endl;
+		cin.clear(); //에러 상태를 취소
+		cin.ignore(256, '\n'); //입력버퍼에 남아있는 잘못된 값들을 지움
+	}
 
 	switch (delnum) {
 	case 1: {
@@ -548,7 +555,9 @@ void listdelete() {
 			break;
 		}
 	}
-	default: cout << "잘못된 입력입니다. 올바른 일정 번호를 입력해주세요.";		// 잘못된 입력 값
+	default:
+		cout << "잘못된 입력입니다. 올바른 일정 번호를 입력해주세요.";		// 잘못된 입력 값
+		Sleep(1500);
 		break;
 	}
 
@@ -876,28 +885,34 @@ void listcomplete() {
 	int i;		// 완료 번호
 	cout << "완료하실 일정 번호를 입력해주세요 >> ";
 	cin >> i;
-	i = --i;		// inF switch~case문 이용을 위해 전위감소연산자
-	inF(&sch, i);		// 일정 txt 파일 내용 읽어오기
-
-	if (sch.b == 204) {		// 완료 여부 값이 공백이면
-		cout << "일정이 없습니다!" << endl;
-		Sleep(1500);		// 1500ms(1.5초) 정지
-	}
-	else if (sch.b == false) {		// 완료 여부 0(미완료)이면
-		sch.b = true;		// 완료 여부 true(1)
-		cout << "완료 되었습니다!!" << endl;
+	if (cin.fail()) { // 정상적인 입력이 진행되지 않으면
+		cout << "숫자를 입력해 주세요!";
+		cin.clear(); //에러 상태를 취소
+		cin.ignore(256, '\n'); //입력버퍼에 남아있는 잘못된 값들을 지움
 		Sleep(1500);
-		outF(sch, i);		// 수정된 txt 파일 내용 덮어쓰기
 	}
-	else if (sch.b == true) {		// 완료 여부 1(완료)이면
-		sch.b = false;		// 완료 여부 false(0)
-		cout << "취소 되었습니다!!" << endl;
-		Sleep(1500);
-		outF(sch, i);
+	
+	else {
+		i = --i;		// inF switch~case문 이용을 위해 전위감소연산자
+		inF(&sch, i);		// 일정 txt 파일 내용 읽어오기
+		if (sch.b == 204) {		// 완료 여부 값이 공백이면
+			cout << "일정이 없습니다!" << endl;
+			Sleep(1500);		// 1500ms(1.5초) 정지
+		}
+		else if (sch.b == false) {		// 완료 여부 0(미완료)이면
+			sch.b = true;		// 완료 여부 true(1)
+			cout << "완료 되었습니다!!" << endl;
+			Sleep(1500);
+			outF(sch, i);		// 수정된 txt 파일 내용 덮어쓰기
+		}
+		else if (sch.b == true) {		// 완료 여부 1(완료)이면
+			sch.b = false;		// 완료 여부 false(0)
+			cout << "취소 되었습니다!!" << endl;
+			Sleep(1500);
+			outF(sch, i);
+		}
 	}
 }
-
-int submove();		// 서브 메뉴 화면 이동 선언
 
 /*메인 화면*/
 void mainmenu() {
@@ -1014,9 +1029,9 @@ void move() {
 	num1 = _getch(); // = system("pause"); 키 입력 받으면 이동
 	switch (num1) {
 	case 67: calendar(); break;		// 명령어 C 아스키 코드
-	case 68: while (submove() != 0) { submove(); } break;		// 명령어 D 아스키 코드, 메인 메뉴 이동 전까지 submove에서 무한 반복
+	case 68: while (true)  { if (submove() == 0) { break; }} break;		// 명령어 D 아스키 코드, 메인 메뉴 이동 전까지 submove에서 무한 반복
 	case 99: calendar(); break;		// 명령어 c 아스키 코드
-	case 100: while (submove() != 0) { submove(); } break;		// 명령어 d 아스키 코드
+	case 100: while (true) { if (submove() == 0) { break; }} break;		// 명령어 d 아스키 코드
 	}
 }
 
@@ -1043,7 +1058,6 @@ int submove() {
 	case 102: listcomplete(); break;		// 명령어 f 아스키 코드
 	case 109: return 0;		// 명령어 m 아스키 코드
 	default: cout << "잘못된 명령어입니다. 아무 키나 입력하세요 >> "; num2 = _getch(); break;
-
 	}
 }
 
