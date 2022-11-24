@@ -351,19 +351,7 @@ void listadd() {
 void listdelete() {
 
 	int delnum;		// 삭제할 일정 번호
-
-	/*파일 읽기*/
-	ifstream txt1("1.txt");
-	ifstream txt2("2.txt");
-	ifstream txt3("3.txt");
-	ifstream txt4("4.txt");
-	ifstream txt5("5.txt");
-	ifstream txt6("6.txt");
-	ifstream txt7("7.txt");
-	ifstream txt8("8.txt");
-	ifstream txt9("9.txt");
-	ifstream txt10("10.txt");
-
+	
 	cout << "\n\n삭제하고 싶은 일정의 번호를 입력하세요 >> ";
 
 	cin >> delnum;		// 삭제할 일정 번호 입력
@@ -376,182 +364,213 @@ void listdelete() {
 
 	switch (delnum) {
 	case 1: {
-		txt1.seekg(0, ios::end);		// 맨 뒷부분 0번째 자리부터 찾기		
-		if (txt1.fail() || (txt1.tellg() < 4)) {		// 1.txt가 없거나 파일 내용이 비어 있다면
+		ifstream fin("1.txt");		// 파일 있으면 열기
+		fin.seekg(0, ios::end);		// 맨 뒷부분 0번째 자리부터 찾기		
+		if (fin.fail() || (fin.tellg() < 4)) {		// 1.txt가 없거나 파일 내용이 비어 있다면
 			cout << "해당 일정은 없습니다.";
 			Sleep(1500);		// 1500ms(1.5초) 정지
+			fin.close();		// 파일 닫기
 			break;
 		}
 		else {
-			ofstream t("1.txt");	// 파일 있으면 열기
-			if (t.is_open()) {		// 파일이 열려 있으면~
+			ofstream fout("1.txt");	// 파일 있으면 열기
+			if (fout.is_open()) {		// 파일이 열려 있으면~
 				cin.clear();			  // getline 버퍼 초기화(전체 버퍼 초기화)
 			}
-			t.close();	//파일 닫기
+			fout.close();	//파일 닫기
 			cout << "해당 일정이 정상적으로 삭제 되었습니다!";
 			Sleep(1500);		// 1500ms(1.5초) 정지
+			fout.close();
 			break;
 		}
+		
 	}
 	case 2: {
-		txt2.seekg(0, ios::end);
-		if (txt2.fail() || (txt2.tellg() < 4)) {
+		ifstream fin("2.txt");
+		fin.seekg(0, ios::end);
+		if (fin.fail() || (fin.tellg() < 4)) {
 			cout << "해당 일정은 없습니다.";
 			Sleep(1500);		// 1500ms(1.5초) 정지
+			fin.close();
 			break;
 		}
 		else {
-			ofstream t("2.txt");
-			if (t.is_open()) {
+			ofstream fout("2.txt");
+			if (fout.is_open()) {
 				cin.clear();
 			}
-			t.close();
+			fout.close();
 			cout << "해당 일정이 정상적으로 삭제 되었습니다!";
 			Sleep(1500);
+			fout.close();
 			break;
 		}
 	}
 	case 3: {
-		txt3.seekg(0, ios::end);
-		if (txt3.fail() || (txt3.tellg() < 4)) {
+		ifstream fin("3.txt");
+		fin.seekg(0, ios::end);
+		if (fin.fail() || (fin.tellg() < 4)) {
 			cout << "해당 일정은 없습니다.";
 			Sleep(1500);		// 1500ms(1.5초) 정지
+			fin.close();
 			break;
 		}
 		else {
-			ofstream t("3.txt");
-			if (t.is_open()) {
+			ofstream fout("3.txt");
+			if (fout.is_open()) {
 				cin.clear();
 			}
-			t.close();
+			fout.close();
 			cout << "해당 일정이 정상적으로 삭제 되었습니다!";
 			Sleep(1500);
+			fout.close();
 			break;
 		}
 	}
 	case 4: {
-		txt4.seekg(0, ios::end);
-		if (txt4.fail() || (txt4.tellg() < 4)) {
+		ifstream fin("4.txt");
+		fin.seekg(0, ios::end);
+		if (fin.fail() || (fin.tellg() < 4)) {
 			cout << "해당 일정은 없습니다.";
 			Sleep(1500);		// 1500ms(1.5초) 정지
+			fin.close();
 			break;
 		}
 		else {
-			ofstream t("4.txt");
-			if (t.is_open()) {
+			ofstream fout("4.txt");
+			if (fout.is_open()) {
 				cin.clear();
 			}
-			t.close();
+			fout.close();
 			cout << "해당 일정이 정상적으로 삭제 되었습니다!";
 			Sleep(1500);
+			fout.close();
 			break;
 		}
 	}
 	case 5: {
-		txt5.seekg(0, ios::end);
-		if (txt5.fail() || (txt5.tellg() < 4)) {
+		ifstream fin("5.txt");
+		fin.seekg(0, ios::end);
+		if (fin.fail() || (fin.tellg() < 4)) {
 			cout << "해당 일정은 없습니다.";
 			Sleep(1500);		// 1500ms(1.5초) 정지
+			fin.close();
 			break;
 		}
 		else {
-			ofstream t("5.txt");
-			if (t.is_open()) {
+			ofstream fout("5.txt");
+			if (fout.is_open()) {
 				cin.clear();
 			}
-			t.close();
+			fout.close();
 			cout << "해당 일정이 정상적으로 삭제 되었습니다!";
 			Sleep(1500);
+			fout.close();
 			break;
 		}
 	}
 	case 6: {
-		txt6.seekg(0, ios::end);
-		if (txt6.fail() || (txt6.tellg() < 4)) {
+		ifstream fin("6.txt");
+		fin.seekg(0, ios::end);
+		if (fin.fail() || (fin.tellg() < 4)) {
 			cout << "해당 일정은 없습니다.";
 			Sleep(1500);		// 1500ms(1.5초) 정지
+			fin.close();
 			break;
 		}
 		else {
-			ofstream t("6.txt");
-			if (t.is_open()) {
+			ofstream fout("6.txt");
+			if (fout.is_open()) {
 				cin.clear();
 			}
-			t.close();
+			fout.close();
 			cout << "해당 일정이 정상적으로 삭제 되었습니다!";
 			Sleep(1500);
+			fout.close();
 			break;
 		}
 	}
 	case 7: {
-		txt7.seekg(0, ios::end);
-		if (txt7.fail() || (txt7.tellg() < 4)) {
+		ifstream fin("7.txt");
+		fin.seekg(0, ios::end);
+		if (fin.fail() || (fin.tellg() < 4)) {
 			cout << "해당 일정은 없습니다.";
 			Sleep(1500);		// 1500ms(1.5초) 정지
+			fin.close();
 			break;
 		}
 		else {
-			ofstream t("7.txt");
-			if (t.is_open()) {
+			ofstream fout("7.txt");
+			if (fout.is_open()) {
 				cin.clear();
 			}
-			t.close();
+			fout.close();
 			cout << "해당 일정이 정상적으로 삭제 되었습니다!";
 			Sleep(1500);
+			fout.close();
 			break;
 		}
 	}
 	case 8: {
-		txt8.seekg(0, ios::end);
-		if (txt8.fail() || (txt8.tellg() < 4)) {
+		ifstream fin("8.txt");
+		fin.seekg(0, ios::end);
+		if (fin.fail() || (fin.tellg() < 4)) {
 			cout << "해당 일정은 없습니다.";
 			Sleep(1500);		// 1500ms(1.5초) 정지
+			fin.close();
 			break;
 		}
 		else {
-			ofstream t("8.txt");
-			if (t.is_open()) {
+			ofstream fout("8.txt");
+			if (fout.is_open()) {
 				cin.clear();
 			}
-			t.close();
+			fout.close();
 			cout << "해당 일정이 정상적으로 삭제 되었습니다!";
 			Sleep(1500);
+			fout.close();
 			break;
 		}
 	}
 	case 9: {
-		txt9.seekg(0, ios::end);
-		if (txt9.fail() || (txt9.tellg() < 4)) {
+		ifstream fin("9.txt");
+		fin.seekg(0, ios::end);
+		if (fin.fail() || (fin.tellg() < 4)) {
 			cout << "해당 일정은 없습니다.";
 			Sleep(1500);		// 1500ms(1.5초) 정지
+			fin.close();
 			break;
 		}
 		else {
-			ofstream t("9.txt");
-			if (t.is_open()) {
+			ofstream fout("9.txt");
+			if (fout.is_open()) {
 				cin.clear();
 			}
-			t.close();
+			fout.close();
 			cout << "해당 일정이 정상적으로 삭제 되었습니다!";
 			Sleep(1500);
+			fout.close();
 			break;
 		}
 	}
 	case 10: {
-		txt10.seekg(0, ios::end);
-		if (txt10.fail() || (txt10.tellg() < 4)) {
+		ifstream fin("10.txt");
+		fin.seekg(0, ios::end);
+		if (fin.fail() || (fin.tellg() < 4)) {
 			cout << "해당 일정은 없습니다.";
 			Sleep(1500);		// 1500ms(1.5초) 정지
+			fin.close();
 			break;
 		}
 		else {
-			ofstream t("10.txt");
-			if (t.is_open()) {
+			ofstream fout("10.txt");
+			if (fout.is_open()) {
 				cin.clear();
 			}
-			t.close();
+			fout.close();
 			cout << "해당 일정이 정상적으로 삭제 되었습니다!";
 			Sleep(1500);
+			fout.close();
 			break;
 		}
 	}
@@ -561,18 +580,6 @@ void listdelete() {
 		break;
 	}
 
-
-	/* 파일 닫기 */
-	txt1.close();
-	txt2.close();
-	txt3.close();
-	txt4.close();
-	txt5.close();
-	txt6.close();
-	txt7.close();
-	txt8.close();
-	txt9.close();
-	txt10.close();
 }
 
 /*캘린더 UI*/
