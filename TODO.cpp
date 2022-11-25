@@ -351,7 +351,7 @@ void listadd() {
 void listdelete() {
 
 	int delnum;		// 삭제할 일정 번호
-	
+
 	cout << "\n\n삭제하고 싶은 일정의 번호를 입력하세요 >> ";
 
 	cin >> delnum;		// 삭제할 일정 번호 입력
@@ -383,7 +383,7 @@ void listdelete() {
 			fout.close();
 			break;
 		}
-		
+
 	}
 	case 2: {
 		ifstream fin("2.txt");
@@ -627,7 +627,7 @@ void calendar() {
 void Manual() {
 	system("title 매뉴얼");		// 콘솔 창 제목 수정
 	system("cls");		// 화면 클리어
-	system(" mode con lines=70 cols=100");		// 콘솔 70 * 100
+	system(" mode con  cols=100 lines=60");		// 콘솔 100 * 60
 	//cout << "□■■■□■■■■■□□■■■■■□□■■■■■○○■■■■■□□■■■■■□□■■■■■□■■■□" << endl;
 	int manualnum = 0;
 
@@ -682,7 +682,7 @@ void Manual() {
 	gotoxy(24, 29);
 	cout << "프로그램 종료하는 명령어";
 
-	gotoxy(0, 64);
+	gotoxy(0, 50);
 	manualnum = _getch();
 }
 
@@ -898,7 +898,7 @@ void listcomplete() {
 		cin.ignore(256, '\n'); //입력버퍼에 남아있는 잘못된 값들을 지움
 		Sleep(1500);
 	}
-	
+
 	else {
 		i = --i;		// inF switch~case문 이용을 위해 전위감소연산자
 		inF(&sch, i);		// 일정 txt 파일 내용 읽어오기
@@ -924,7 +924,7 @@ void listcomplete() {
 /*메인 화면*/
 void mainmenu() {
 	system("cls");//화면 클리어 
-	system("mode con cols=100 lines=70"); //콘솔 100*70
+	system("mode con cols=100 lines=60"); //콘솔 100*60
 
 	gotoxy(0, 5);
 	//좌우 공백 17칸 100*70 기준
@@ -959,7 +959,7 @@ void mainmenu() {
 	gotoxy(50, 40); cout << "  ■■■ (달력)";
 
 
-	gotoxy(0, 65);
+	gotoxy(0, 50);
 	cout << "명령어>>";
 
 }
@@ -967,7 +967,7 @@ void mainmenu() {
 /*서브 화면*/
 void submenu() {
 	system("cls");		// 화면 클리어
-	system("mode con: cols=100 lines=70");		// 콘솔 100*70
+	system("mode con: cols=100 lines=60");		// 콘솔 100*60
 
 	/* 일정 */
 	ToDo a[10];		// ToDo 타입의 객체 배열 선언
@@ -1036,9 +1036,9 @@ void move() {
 	num1 = _getch(); // = system("pause"); 키 입력 받으면 이동
 	switch (num1) {
 	case 67: calendar(); break;		// 명령어 C 아스키 코드
-	case 68: while (true)  { if (submove() == 0) { break; }} break;		// 명령어 D 아스키 코드, 메인 메뉴 이동 전까지 submove에서 무한 반복
+	case 68: while (true) { if (submove() == 0) { break; } } break;		// 명령어 D 아스키 코드, 메인 메뉴 이동 전까지 submove에서 무한 반복
 	case 99: calendar(); break;		// 명령어 c 아스키 코드
-	case 100: while (true) { if (submove() == 0) { break; }} break;		// 명령어 d 아스키 코드
+	case 100: while (true) { if (submove() == 0) { break; } } break;		// 명령어 d 아스키 코드
 	}
 }
 
