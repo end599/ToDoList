@@ -29,7 +29,7 @@ void gotoxy(int x, int y) {
 }
 
 /*일정 추가 도우미*/
-int addsub() { 
+int addsub() {
 	cout << "내용을 입력해 주세요 >> ";
 	cin.clear();           //getline 버퍼 초기화(전체 버퍼 초기화)
 	getline(cin, Note.work);   // 공백 포함 문자열 쓰기
@@ -67,7 +67,7 @@ void listadd() {
 					if (addsub() != 0) {
 						cout << "일정 내용이 수정되었습니다!!";
 						Sleep(1500);// 1500ms(1.5초) 정지
-					}	
+					}
 				}
 				break;
 			}
@@ -82,9 +82,9 @@ void listadd() {
 		}
 		case 2: {
 			ifstream t1("2.txt");
-			t1.seekg(0, ios::end); 
-			if (t1.tellg() > 4) { 
-				t1.close();	
+			t1.seekg(0, ios::end);
+			if (t1.tellg() > 4) {
+				t1.close();
 				cout << "이미 내용 입력되어 있습니다. \n새로운 내용 입력 : 'space' \t\t\t취소 : 아무 키" << endl;
 				int a = _getch();
 				if (a == 32) {
@@ -915,7 +915,7 @@ void mainmenu() {
 	gotoxy(50, 40); cout << "  ■■■ (달력)";
 
 
-	gotoxy(0, 65);
+	gotoxy(0, 50);
 	cout << "명령어>>";
 
 }
@@ -981,8 +981,8 @@ void submenu() {
 
 
 	/*메뉴얼 명령어*/
-	cout << "\n\n\n\n\n\n\n\n\n\t\t\t\t\t" << "메뉴얼 명령어 : C" << endl;
-	cout << "명령어 >> "<<endl;
+	cout << "\n\n\n\n\n\t\t\t\t\t" << "메뉴얼 명령어 : C" << endl;
+	cout << "명령어 >> " << endl;
 }
 
 /*화면 전환2*/
