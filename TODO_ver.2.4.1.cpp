@@ -914,7 +914,9 @@ void mainmenu() {
 	gotoxy(50, 39); cout << "■        ";
 	gotoxy(50, 40); cout << "  ■■■ (달력)";
 
-	gotoxy(0, 50);	cout << "명령어>>";
+
+	gotoxy(0, 50);
+	cout << "명령어>>";
 
 }
 
@@ -990,7 +992,7 @@ void move() {
 	num1 = _getch(); // = system("pause"); 키 입력 받으면 이동
 	switch (num1) {
 	case 67: calendar(); break;		// 명령어 C 아스키 코드
-	case 68: while (true) { if (submove() == 0) { break; } } break;		// 명령어 D 아스키 코드, 메인 메뉴 이동 전까지 submove에서 무한 반복
+	case 68: while (true) { if (submove() != 1) { break; } } break;		// 명령어 D 아스키 코드, 메인 메뉴 이동 전까지 submove에서 무한 반복
 	case 99: calendar(); break;		// 명령어 c 아스키 코드
 	case 100: while (true) { if (submove() == 0) { break; } }break;		// 명령어 d 아스키 코드
 	}
