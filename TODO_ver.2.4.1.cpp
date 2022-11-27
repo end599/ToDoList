@@ -34,7 +34,7 @@ int addsub() {
 	cin.clear();           //getline 버퍼 초기화(전체 버퍼 초기화)
 	getline(cin, Note.work);   // 공백 포함 문자열 쓰기
 	Note.b = 0;
-	if (Note.work.size() > 40) {
+	if (Note.work.size() > 60) { //글자 수 제한 60Byte
 		cout << "너무 깁니다!.";
 		Sleep(500);
 		return 0;
